@@ -25,6 +25,11 @@ jobs:
         run: |
           rustup update ${{ matrix.toolchain }}
           rustup default ${{ matrix.toolchain }}
+      - name: Install dependencies (ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt update -qq
+          sudo apt install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxext-dev libxfixes-dev
       - name: Check warnings
         run: cargo clippy -- -D warnings
       - name: Run tests
