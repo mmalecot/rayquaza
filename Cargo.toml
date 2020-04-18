@@ -1,0 +1,31 @@
+[package]
+name = "rayquaza"
+version = "1.0.0-dev.1"
+authors = ["Mickaël Malécot <mickael.malecot@gmail.com>"]
+edition = "2018"
+description = "Idiomatic wrapper for raylib"
+license = "MIT/Apache-2.0"
+readme = "README.md"
+keywords = ["bindings", "wrapper", "raylib", "game", "engine"]
+categories = ["api-bindings", "game-engines"]
+homepage = "https://github.com/mmalecot/rayquaza"
+documentation = "https://docs.rs/rayquaza"
+repository = "https://github.com/mmalecot/rayquaza"
+exclude = [".github/*", "examples/*"]
+
+[profile.release]
+lto = true
+
+[build-dependencies]
+cmake = { version = "0.1", optional = true }
+flate2 = { version = "1.0", optional = true }
+tar = { version = "0.4", optional = true }
+ureq = { version = "0.12", optional = true }
+
+[features]
+default = ["static"]
+
+# Downloads, compiles and links statically raylib.
+# This results in a program without external dependencies (except for the lowest level).
+# If disabled, raylib will have to be installed on the system.
+static = ["cmake", "flate2", "tar", "ureq"]
