@@ -15,7 +15,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     const RAYLIB_NAME: &str = "raylib";
     const RAYLIB_ARCHIVE_EXTENSION: &str = "tar.gz";
     const RAYLIB_VERSION: &str = "3.0.0";
-    const RAYLIB_GITHUB_REPOSITORY: &str = "raysan5/raylib";
+    const RAYLIB_GITHUB_REPOSITORY: &str = "mmalecot/raylib";
     const GITHUB_CODELOAD_URL: &str = "https://codeload.github.com";
 
     // Computes paths
