@@ -42,18 +42,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
     let raylib_directory = out_directory.join(&raylib_directory);
 
-    // Downloads raylib
-    let response = ureq::get(&raylib_archive_url).call();
-    let mut reader = response.into_reader();
-    let mut writer = File::create(&raylib_archive_file)?;
-    io::copy(&mut reader, &mut writer)?;
+    if !raylib_directory.exists() {
+        // Downloads raylib
+        let response = ureq::get(&raylib_archive_url).call();
+        let mut reader = response.into_reader();
+        let mut writer = File::create(&raylib_archive_file)?;
+        io::copy(&mut reader, &mut writer)?;
 
-    // Decompresses archive
-    let file = File::open(&raylib_archive_file)?;
-    let reader = GzDecoder::new(file);
-    let mut archive = Archive::new(reader);
-    archive.unpack(&out_directory)?;
-    fs::remove_file(&raylib_archive_file)?;
+        // Decompresses archive
+        let file = File::open(&raylib_archive_file)?;
+        let reader = GzDecoder::new(file);
+        let mut archive = Archive::new(reader);
+        archive.unpack(&out_directory)?;
+        fs::remove_file(&raylib_archive_file)?;
+    }
 
     // Compiles raylib
     let mut config = Config::new(&raylib_directory);
@@ -66,7 +68,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .define("SUPPORT_GIF_RECORDING", "OFF")
         .define("STATIC", "TRUE")
         .build();
-    fs::remove_dir_all(&raylib_directory)?;
     let library_directory = build_directory.join("lib");
 
     // Links libraries
