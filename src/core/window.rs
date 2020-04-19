@@ -1,13 +1,16 @@
+//! Window module.
+
 use crate::{
-    core::{drawing::Drawing, error::Error},
+    core::{drawing::Canvas, error::Error, input::Key},
     ffi,
 };
 use std::ffi::CString;
 
+/// Window type.
 pub struct Window;
 
 impl Window {
-    /// Initialize window and OpenGL context.
+    /// Initializes a window and an OpenGL context.
     pub fn create(width: i32, height: i32, title: &str) -> Result<Window, Error> {
         unsafe {
             let title = CString::new(title).unwrap();
@@ -20,19 +23,27 @@ impl Window {
         }
     }
 
-    /// Set target FPS (maximum).
+    /// Sets target FPS (maximum).
     pub fn set_target_fps(&mut self, fps: i32) {
         unsafe { ffi::SetTargetFPS(fps) }
     }
 
-    /// Setup canvas (framebuffer) to start drawing.
-    pub fn drawing(&mut self) -> Drawing {
-        Drawing::new()
+    /// Draws in a canvas and swap buffers (double buffering).
+    pub fn draw<F>(&mut self, function: F)
+    where
+        F: FnOnce(&mut Canvas),
+    {
+        function(&mut Canvas::new())
     }
 
-    /// Check if KEY_ESCAPE pressed or Close icon pressed.
+    /// Checks if Escape key pressed or Close icon pressed.
     pub fn should_close(&self) -> bool {
         unsafe { ffi::WindowShouldClose() }
+    }
+
+    /// Detects if a key is being pressed.
+    pub fn is_key_down(&self, key: Key) -> bool {
+        unsafe { ffi::IsKeyDown(key as i32) }
     }
 }
 

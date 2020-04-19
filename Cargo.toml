@@ -26,6 +26,7 @@ ureq = { version = "0.12", optional = true }
 default = ["static"]
 
 # Downloads, compiles and links statically raylib.
-# This results in a program without external dependencies (except for the lowest level).
-# If disabled, raylib will have to be installed on the system.
+# It requires to have CMake and a C compiler to build.
+# It will create a program without external dependencies (except for the lowest level).
+# If disabled, raylib will have to be installed on the target system.
 static = ["cmake", "flate2", "tar", "ureq"]
