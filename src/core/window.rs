@@ -11,23 +11,27 @@ use crate::{
 };
 use std::{
     ffi::{CStr, CString},
-    sync::atomic::{AtomicBool, Ordering},
+    marker::PhantomData,
 };
 
 /// Window type.
-pub struct Window;
+pub struct Window {
+    _marker: PhantomData<*mut ()>,
+}
 
 impl Window {
     /// Initializes a window and an OpenGL context.
     pub fn create(width: i32, height: i32, title: &str) -> Result<Window, Error> {
         unsafe {
-            static FIRST_TIME: AtomicBool = AtomicBool::new(true);
-            if FIRST_TIME.load(Ordering::Relaxed) {
+            static mut FIRST_TIME: bool = true;
+            if FIRST_TIME {
                 let title = CString::new(title).unwrap();
                 ffi::InitWindow(width, height, title.as_ptr());
                 if ffi::IsWindowReady() {
-                    FIRST_TIME.store(false, Ordering::Relaxed);
-                    Ok(Window)
+                    FIRST_TIME = false;
+                    Ok(Window {
+                        _marker: PhantomData,
+                    })
                 } else {
                     Err(Error::WindowInitializationFailed)
                 }
