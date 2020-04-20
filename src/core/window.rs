@@ -169,6 +169,21 @@ impl Window {
         unsafe { ffi::SetTargetFPS(fps) }
     }
 
+    /// Returns current FPS.
+    pub fn get_fps(&self) -> i32 {
+        unsafe { ffi::GetFPS() }
+    }
+
+    /// Returns time in seconds for last frame drawn.
+    pub fn get_frame_time(&self) -> f32 {
+        unsafe { ffi::GetFrameTime() }
+    }
+
+    /// Returns elapsed time in seconds since window creation.
+    pub fn get_time(&self) -> f64 {
+        unsafe { ffi::GetTime() }
+    }
+
     /// Draws in a canvas and swap buffers (double buffering).
     pub fn draw<F>(&mut self, function: F)
     where

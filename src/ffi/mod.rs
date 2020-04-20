@@ -1,6 +1,6 @@
 //! raylib raw FFI bindings.
 
-use std::os::raw::{c_char, c_float, c_int, c_uchar};
+use std::os::raw::{c_char, c_double, c_float, c_int, c_uchar};
 
 // Constants
 // Alphanumeric keys
@@ -183,6 +183,9 @@ extern "C" {
 
     // Timing-related functions
     pub fn SetTargetFPS(fps: c_int);
+    pub fn GetFPS() -> c_int;
+    pub fn GetFrameTime() -> c_float;
+    pub fn GetTime() -> c_double;
 
     // Input-related functions: keyboard
     pub fn IsKeyPressed(key: c_int) -> bool;
