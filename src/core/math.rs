@@ -19,7 +19,7 @@ macro_rules! vector {
 
 /// Vector2 type.
 #[repr(C)]
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vector2 {
     pub x: f32,
     pub y: f32,
@@ -265,7 +265,7 @@ impl SubAssign<f32> for Vector2 {
 
 /// Vector3 type.
 #[repr(C)]
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vector3 {
     pub x: f32,
     pub y: f32,

@@ -12,7 +12,7 @@ macro_rules! color {
 
 /// RGBA color (32-bit).
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 pub struct Color {
     pub red: u8,
     pub green: u8,
