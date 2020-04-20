@@ -9,7 +9,10 @@ use crate::{
     },
     ffi,
 };
-use std::ffi::{CStr, CString};
+use std::{
+    ffi::{CStr, CString},
+    sync::atomic::{AtomicBool, Ordering},
+};
 
 /// Window type.
 pub struct Window;
@@ -18,12 +21,18 @@ impl Window {
     /// Initializes a window and an OpenGL context.
     pub fn create(width: i32, height: i32, title: &str) -> Result<Window, Error> {
         unsafe {
-            let title = CString::new(title).unwrap();
-            ffi::InitWindow(width, height, title.as_ptr());
-            if ffi::IsWindowReady() {
-                Ok(Window)
+            static FIRST_TIME: AtomicBool = AtomicBool::new(true);
+            if FIRST_TIME.load(Ordering::Relaxed) {
+                let title = CString::new(title).unwrap();
+                ffi::InitWindow(width, height, title.as_ptr());
+                if ffi::IsWindowReady() {
+                    FIRST_TIME.store(false, Ordering::Relaxed);
+                    Ok(Window)
+                } else {
+                    Err(Error::WindowInitializationFailed)
+                }
             } else {
-                Err(Error::InitWindowFailed)
+                Err(Error::WindowAlreadyCreated)
             }
         }
     }
