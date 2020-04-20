@@ -1,7 +1,12 @@
 //! Window module.
 
 use crate::{
-    core::{drawing::Canvas, error::Error, input::Key, math::Vector2},
+    core::{
+        drawing::Canvas,
+        error::Error,
+        input::{Button, Key},
+        math::Vector2,
+    },
     ffi,
 };
 use std::ffi::{CStr, CString};
@@ -175,6 +180,61 @@ impl Window {
     /// Detects if a key is being pressed.
     pub fn is_key_down(&self, key: Key) -> bool {
         unsafe { ffi::IsKeyDown(key as i32) }
+    }
+
+    /// Detect if a mouse button has been pressed once.
+    pub fn is_mouse_button_pressed(&self, button: Button) -> bool {
+        unsafe { ffi::IsMouseButtonPressed(button as i32) }
+    }
+
+    /// Detects if a mouse button is being pressed.
+    pub fn is_mouse_button_down(&self, button: Button) -> bool {
+        unsafe { ffi::IsMouseButtonDown(button as i32) }
+    }
+
+    /// Detects if a mouse button has been released once.
+    pub fn is_mouse_button_released(&self, button: Button) -> bool {
+        unsafe { ffi::IsMouseButtonReleased(button as i32) }
+    }
+
+    /// Detects if a mouse button is NOT being pressed.
+    pub fn is_mouse_button_up(&self, button: Button) -> bool {
+        unsafe { ffi::IsMouseButtonUp(button as i32) }
+    }
+
+    /// Returns mouse position X.
+    pub fn get_mouse_x(&self) -> i32 {
+        unsafe { ffi::GetMouseX() }
+    }
+
+    /// Returns mouse position Y.
+    pub fn get_mouse_y(&self) -> i32 {
+        unsafe { ffi::GetMouseY() }
+    }
+
+    /// Returns mouse position XY.
+    pub fn get_mouse_position(&self) -> Vector2 {
+        unsafe { ffi::GetMousePosition().into() }
+    }
+
+    /// Sets mouse position XY.
+    pub fn set_mouse_position(&mut self, x: i32, y: i32) {
+        unsafe { ffi::SetMousePosition(x, y) }
+    }
+
+    /// Sets mouse offset.
+    pub fn set_mouse_offset(&mut self, x: i32, y: i32) {
+        unsafe { ffi::SetMouseOffset(x, y) }
+    }
+
+    /// Sets mouse scaling.
+    pub fn set_mouse_scale(&mut self, x: f32, y: f32) {
+        unsafe { ffi::SetMouseScale(x, y) }
+    }
+
+    /// Returns mouse wheel movement Y.
+    pub fn get_mouse_wheel_move(&self) -> i32 {
+        unsafe { ffi::GetMouseWheelMove() }
     }
 }
 

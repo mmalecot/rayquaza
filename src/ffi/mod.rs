@@ -114,6 +114,11 @@ pub const KEY_KP_ADD: i32 = 334;
 pub const KEY_KP_ENTER: i32 = 335;
 pub const KEY_KP_EQUAL: i32 = 33;
 
+// Mouse buttons
+pub const MOUSE_LEFT_BUTTON: i32 = 0;
+pub const MOUSE_RIGHT_BUTTON: i32 = 1;
+pub const MOUSE_MIDDLE_BUTTON: i32 = 2;
+
 // Structures
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -181,6 +186,19 @@ extern "C" {
 
     // Input-related functions: keyb
     pub fn IsKeyDown(key: c_int) -> bool;
+
+    // Input-related functions: mouse
+    pub fn IsMouseButtonPressed(button: c_int) -> bool;
+    pub fn IsMouseButtonDown(button: c_int) -> bool;
+    pub fn IsMouseButtonReleased(button: c_int) -> bool;
+    pub fn IsMouseButtonUp(button: c_int) -> bool;
+    pub fn GetMouseX() -> c_int;
+    pub fn GetMouseY() -> c_int;
+    pub fn GetMousePosition() -> Vector2;
+    pub fn SetMousePosition(x: c_int, y: c_int);
+    pub fn SetMouseOffset(offsetX: c_int, offsetY: c_int);
+    pub fn SetMouseScale(scaleX: c_float, scaleY: c_float);
+    pub fn GetMouseWheelMove() -> c_int;
 
     // Shapes
     // Basic shapes drawing functions

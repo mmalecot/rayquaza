@@ -115,3 +115,12 @@ pub enum Key {
     KeypadEnter = ffi::KEY_KP_ENTER,
     KeypadEqual = ffi::KEY_KP_EQUAL,
 }
+
+/// Kinds of mouse buttons.
+#[repr(i32)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Button {
+    Left = ffi::MOUSE_LEFT_BUTTON,
+    Right = ffi::MOUSE_RIGHT_BUTTON,
+    Middle = ffi::MOUSE_MIDDLE_BUTTON,
+}
