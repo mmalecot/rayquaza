@@ -184,8 +184,13 @@ extern "C" {
     // Timing-related functions
     pub fn SetTargetFPS(fps: c_int);
 
-    // Input-related functions: keyb
+    // Input-related functions: keyboard
+    pub fn IsKeyPressed(key: c_int) -> bool;
     pub fn IsKeyDown(key: c_int) -> bool;
+    pub fn IsKeyReleased(key: c_int) -> bool;
+    pub fn IsKeyUp(key: c_int) -> bool;
+    pub fn GetKeyPressed() -> c_int;
+    pub fn SetExitKey(key: c_int);
 
     // Input-related functions: mouse
     pub fn IsMouseButtonPressed(button: c_int) -> bool;
