@@ -41,6 +41,20 @@ impl Canvas {
             ffi::DrawCircleV(center.into().into(), radius, color.into().into());
         }
     }
+
+    /// Draws a color-filled rectangle.
+    pub fn draw_rectangle(
+        &mut self,
+        x: i32,
+        y: i32,
+        width: i32,
+        height: i32,
+        color: impl Into<Color>,
+    ) {
+        unsafe {
+            ffi::DrawRectangle(x, y, width, height, color.into().into());
+        }
+    }
 }
 
 impl Drop for Canvas {

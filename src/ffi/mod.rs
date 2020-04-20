@@ -208,6 +208,7 @@ extern "C" {
     // Shapes
     // Basic shapes drawing functions
     pub fn DrawCircleV(center: Vector2, radius: f32, color: Color);
+    pub fn DrawRectangle(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color);
 
     // Text
     // Text drawing functions
