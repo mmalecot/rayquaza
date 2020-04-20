@@ -30,3 +30,19 @@ default = ["static"]
 # It will create a program without external dependencies (except for the lowest level).
 # If disabled, raylib will have to be installed on the target system.
 static = ["cmake", "flate2", "tar", "ureq"]
+
+[[example]]
+name = "basic_window"
+path = "examples/core/basic_window.rs"
+
+[[example]]
+name = "keyboard_input"
+path = "examples/core/keyboard_input.rs"
+
+[[example]]
+name = "mouse_input"
+path = "examples/core/mouse_input.rs"
+
+[[example]]
+name = "mouse_wheel_input"
+path = "examples/core/mouse_wheel_input.rs"
