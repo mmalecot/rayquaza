@@ -147,6 +147,29 @@ extern "C" {
     pub fn WindowShouldClose() -> bool;
     pub fn CloseWindow();
     pub fn IsWindowReady() -> bool;
+    pub fn IsWindowMinimized() -> bool;
+    pub fn IsWindowResized() -> bool;
+    pub fn IsWindowHidden() -> bool;
+    pub fn IsWindowFullscreen() -> bool;
+    pub fn ToggleFullscreen();
+    pub fn UnhideWindow();
+    pub fn HideWindow();
+    pub fn SetWindowTitle(title: *const c_char);
+    pub fn SetWindowPosition(x: c_int, y: c_int);
+    pub fn SetWindowMonitor(monitor: c_int);
+    pub fn SetWindowMinSize(width: c_int, height: c_int);
+    pub fn SetWindowSize(width: c_int, height: c_int);
+    pub fn GetScreenWidth() -> c_int;
+    pub fn GetScreenHeight() -> c_int;
+    pub fn GetMonitorCount() -> c_int;
+    pub fn GetMonitorWidth(monitor: c_int) -> c_int;
+    pub fn GetMonitorHeight(monitor: c_int) -> c_int;
+    pub fn GetMonitorPhysicalWidth(monitor: c_int) -> c_int;
+    pub fn GetMonitorPhysicalHeight(monitor: c_int) -> c_int;
+    pub fn GetWindowPosition() -> Vector2;
+    pub fn GetMonitorName(monitor: c_int) -> *const c_char;
+    pub fn GetClipboardText() -> *const c_char;
+    pub fn SetClipboardText(text: *const c_char);
 
     // Drawing-related functions
     pub fn ClearBackground(color: Color);
