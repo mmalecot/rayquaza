@@ -434,7 +434,7 @@ impl WindowBuilder {
         self
     }
 
-    /// Set to allow transparent window.
+    /// Sets to allow transparent window.
     pub fn transparent(mut self) -> WindowBuilder {
         self.flags |= ffi::FLAG_WINDOW_TRANSPARENT;
         self
