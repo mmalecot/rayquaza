@@ -129,7 +129,7 @@ impl Window {
         unsafe { ffi::GetMonitorWidth(monitor) }
     }
 
-    /// Gest monitor height.
+    /// Gets monitor height.
     pub fn get_monitor_height(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorHeight(monitor) }
     }
