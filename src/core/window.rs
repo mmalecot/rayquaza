@@ -12,6 +12,7 @@ use crate::{
 use std::{
     ffi::{CStr, CString},
     marker::PhantomData,
+    sync::atomic::{AtomicBool, Ordering},
 };
 
 /// Window type.
@@ -23,12 +24,12 @@ impl Window {
     /// Initializes a window and an OpenGL context.
     pub fn create(width: i32, height: i32, title: &str) -> Result<Window, Error> {
         unsafe {
-            static mut FIRST_TIME: bool = true;
-            if FIRST_TIME {
+            static FIRST_CALL: AtomicBool = AtomicBool::new(true);
+            if FIRST_CALL.load(Ordering::Relaxed) {
                 let title = CString::new(title).unwrap();
                 ffi::InitWindow(width, height, title.as_ptr());
                 if ffi::IsWindowReady() {
-                    FIRST_TIME = false;
+                    FIRST_CALL.store(false, Ordering::Relaxed);
                     Ok(Window {
                         _marker: PhantomData,
                     })
