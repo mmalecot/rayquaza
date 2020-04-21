@@ -7,6 +7,7 @@ fn main() -> Result {
         .size(800, 450)
         .title("Mouse input")
         .vsync()
+        .msaa_4x()
         .build()?;
     let mut ball = (Vector2::default(), Color::DARKBLUE);
     while !window.should_close() {

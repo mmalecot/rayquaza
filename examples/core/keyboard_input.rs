@@ -11,6 +11,7 @@ fn main() -> Result {
         .size(SCREEN_WIDTH, SCREEN_HEIGHT)
         .title("Keyboard input")
         .vsync()
+        .msaa_4x()
         .build()?;
     let mut ball_position = Vector2::new((SCREEN_WIDTH / 2) as f32, (SCREEN_HEIGHT / 2) as f32);
     while !window.should_close() {
