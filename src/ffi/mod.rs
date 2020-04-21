@@ -1,6 +1,6 @@
 //! raylib raw FFI bindings.
 
-use std::os::raw::{c_char, c_double, c_float, c_int, c_uchar};
+use std::os::raw::{c_char, c_double, c_float, c_int, c_uchar, c_uint};
 
 // Constants
 // Alphanumeric keys
@@ -119,6 +119,16 @@ pub const MOUSE_LEFT_BUTTON: i32 = 0;
 pub const MOUSE_RIGHT_BUTTON: i32 = 1;
 pub const MOUSE_MIDDLE_BUTTON: i32 = 2;
 
+// System config flags
+pub const FLAG_FULLSCREEN_MODE: u32 = 2;
+pub const FLAG_WINDOW_RESIZABLE: u32 = 4;
+pub const FLAG_WINDOW_UNDECORATED: u32 = 8;
+pub const FLAG_WINDOW_TRANSPARENT: u32 = 16;
+pub const FLAG_WINDOW_HIDDEN: u32 = 128;
+pub const FLAG_WINDOW_ALWAYS_RUN: u32 = 256;
+pub const FLAG_MSAA_4X_HINT: u32 = 32;
+pub const FLAG_VSYNC_HINT: u32 = 64;
+
 // Structures
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -186,6 +196,9 @@ extern "C" {
     pub fn GetFPS() -> c_int;
     pub fn GetFrameTime() -> c_float;
     pub fn GetTime() -> c_double;
+
+    // Misc. functions
+    pub fn SetConfigFlags(flags: c_uint);
 
     // Input-related functions: keyboard
     pub fn IsKeyPressed(key: c_int) -> bool;

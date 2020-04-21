@@ -6,6 +6,7 @@ use crate::{
         error::Error,
         input::{Button, Key},
         math::Vector2,
+        result::Result,
     },
     ffi,
 };
@@ -21,27 +22,6 @@ pub struct Window {
 }
 
 impl Window {
-    /// Initializes a window and an OpenGL context.
-    pub fn create(width: i32, height: i32, title: &str) -> Result<Window, Error> {
-        unsafe {
-            static FIRST_CALL: AtomicBool = AtomicBool::new(true);
-            if FIRST_CALL.load(Ordering::Relaxed) {
-                let title = CString::new(title).unwrap();
-                ffi::InitWindow(width, height, title.as_ptr());
-                if ffi::IsWindowReady() {
-                    FIRST_CALL.store(false, Ordering::Relaxed);
-                    Ok(Window {
-                        _marker: PhantomData,
-                    })
-                } else {
-                    Err(Error::WindowInitializationFailed)
-                }
-            } else {
-                Err(Error::WindowAlreadyCreated)
-            }
-        }
-    }
-
     /// Checks if Escape key pressed or Close icon pressed.
     pub fn should_close(&self) -> bool {
         unsafe { ffi::WindowShouldClose() }
@@ -404,5 +384,120 @@ impl Window {
 impl Drop for Window {
     fn drop(&mut self) {
         unsafe { ffi::CloseWindow() }
+    }
+}
+
+/// Window builder.
+pub struct WindowBuilder {
+    flags: u32,
+    width: i32,
+    height: i32,
+    title: String,
+}
+
+impl WindowBuilder {
+    /// Creates a new `WindowBuilder`.
+    pub fn new() -> WindowBuilder {
+        WindowBuilder::default()
+    }
+
+    /// Sets window size.
+    pub fn size(mut self, width: i32, height: i32) -> WindowBuilder {
+        self.width = width;
+        self.height = height;
+        self
+    }
+
+    /// Sets window title.
+    pub fn title(mut self, title: &str) -> WindowBuilder {
+        self.title = title.to_string();
+        self
+    }
+
+    /// Sets to run window in fullscreen.
+    pub fn fullscreen(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_FULLSCREEN_MODE;
+        self.flags &= !ffi::FLAG_WINDOW_RESIZABLE;
+        self
+    }
+
+    /// Sets to allow resizable window.
+    pub fn resizable(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_WINDOW_RESIZABLE;
+        self.flags &= !ffi::FLAG_FULLSCREEN_MODE;
+        self
+    }
+
+    /// Sets to disable window decoration.
+    pub fn undecorated(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_WINDOW_UNDECORATED;
+        self
+    }
+
+    /// Set to allow transparent window.
+    pub fn transparent(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_WINDOW_TRANSPARENT;
+        self
+    }
+
+    /// Sets to create the window initially hidden.
+    pub fn hidden(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_WINDOW_HIDDEN;
+        self
+    }
+
+    /// Sets to allow window running while minimized.
+    pub fn always_run(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_WINDOW_ALWAYS_RUN;
+        self
+    }
+
+    /// Sets to try enabling MSAA 4X.
+    pub fn msaa_4x(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_MSAA_4X_HINT;
+        self
+    }
+
+    /// Sets to try enabling V-Sync on GPU.
+    pub fn vsync(mut self) -> WindowBuilder {
+        self.flags |= ffi::FLAG_VSYNC_HINT;
+        self
+    }
+
+    /// Builds the window.
+    pub fn build(self) -> Result<Window> {
+        unsafe {
+            static FIRST_CALL: AtomicBool = AtomicBool::new(true);
+            if FIRST_CALL.load(Ordering::Relaxed) {
+                ffi::SetConfigFlags(self.flags);
+                let title = CString::new(self.title).unwrap();
+                ffi::InitWindow(self.width, self.height, title.as_ptr());
+                if ffi::IsWindowReady() {
+                    FIRST_CALL.store(false, Ordering::Relaxed);
+                    Ok(Window {
+                        _marker: PhantomData,
+                    })
+                } else {
+                    Err(Error::WindowInitializationFailed)
+                }
+            } else {
+                Err(Error::WindowAlreadyCreated)
+            }
+        }
+    }
+}
+
+impl Default for WindowBuilder {
+    fn default() -> WindowBuilder {
+        WindowBuilder {
+            flags: Default::default(),
+            width: 1280,
+            height: 720,
+            title: String::from(concat!(
+                env!("CARGO_PKG_NAME"),
+                " ",
+                env!("CARGO_PKG_VERSION")
+            )),
+        }
     }
 }

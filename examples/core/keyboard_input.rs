@@ -1,12 +1,17 @@
-use rayquaza::core::{color::Color, input::Key, math::Vector2, result::Result, window::Window};
+use rayquaza::core::{
+    color::Color, input::Key, math::Vector2, result::Result, window::WindowBuilder,
+};
 
 const SCREEN_WIDTH: i32 = 800;
 const SCREEN_HEIGHT: i32 = 450;
 const BALL_SPEED: f32 = 120.0;
 
 fn main() -> Result {
-    let mut window = Window::create(SCREEN_WIDTH, SCREEN_HEIGHT, "Keyboard input")?;
-    window.set_target_fps(60);
+    let mut window = WindowBuilder::new()
+        .size(SCREEN_WIDTH, SCREEN_HEIGHT)
+        .title("Keyboard input")
+        .vsync()
+        .build()?;
     let mut ball_position = Vector2::new((SCREEN_WIDTH / 2) as f32, (SCREEN_HEIGHT / 2) as f32);
     while !window.should_close() {
         // Update

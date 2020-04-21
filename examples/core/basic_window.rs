@@ -1,8 +1,11 @@
-use rayquaza::core::{color::Color, result::Result, window::Window};
+use rayquaza::core::{color::Color, result::Result, window::WindowBuilder};
 
 fn main() -> Result {
-    let mut window = Window::create(800, 450, "Basic window")?;
-    window.set_target_fps(60);
+    let mut window = WindowBuilder::new()
+        .size(800, 450)
+        .title("Basic window")
+        .vsync()
+        .build()?;
     while !window.should_close() {
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);

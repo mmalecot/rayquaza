@@ -1,12 +1,15 @@
-use rayquaza::core::{color::Color, result::Result, window::Window};
+use rayquaza::core::{color::Color, result::Result, window::WindowBuilder};
 
 const SCREEN_WIDTH: i32 = 800;
 const SCREEN_HEIGHT: i32 = 450;
 const BOX_SPEED: f32 = 240.0;
 
 fn main() -> Result {
-    let mut window = Window::create(SCREEN_WIDTH, SCREEN_HEIGHT, "Mouse wheel input")?;
-    window.set_target_fps(60);
+    let mut window = WindowBuilder::new()
+        .size(SCREEN_WIDTH, SCREEN_HEIGHT)
+        .title("Mouse wheel input")
+        .vsync()
+        .build()?;
     let mut box_position = ((SCREEN_WIDTH / 2) - 40, (SCREEN_HEIGHT / 2) - 40);
     while !window.should_close() {
         // Update

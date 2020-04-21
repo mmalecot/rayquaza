@@ -1,8 +1,13 @@
-use rayquaza::core::{color::Color, input::Button, math::Vector2, result::Result, window::Window};
+use rayquaza::core::{
+    color::Color, input::Button, math::Vector2, result::Result, window::WindowBuilder,
+};
 
 fn main() -> Result {
-    let mut window = Window::create(800, 450, "Mouse input")?;
-    window.set_target_fps(60);
+    let mut window = WindowBuilder::new()
+        .size(800, 450)
+        .title("Mouse input")
+        .vsync()
+        .build()?;
     let mut ball = (Vector2::default(), Color::DARKBLUE);
     while !window.should_close() {
         // Update
