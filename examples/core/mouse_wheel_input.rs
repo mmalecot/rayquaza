@@ -1,16 +1,18 @@
 use rayquaza::core::{color::Color, result::Result, window::WindowBuilder};
 
-const SCREEN_WIDTH: i32 = 800;
-const SCREEN_HEIGHT: i32 = 450;
 const BOX_SPEED: f32 = 240.0;
+const BOX_SIZE: i32 = 80;
 
 fn main() -> Result {
     let mut window = WindowBuilder::new()
-        .size(SCREEN_WIDTH, SCREEN_HEIGHT)
+        .size(800, 450)
         .title("Mouse wheel input")
         .vsync()
         .build()?;
-    let mut box_position = ((SCREEN_WIDTH / 2) - 40, (SCREEN_HEIGHT / 2) - 40);
+    let mut box_position = (
+        window.get_screen_width() / 2 - BOX_SIZE / 2,
+        window.get_screen_height() / 2 - BOX_SIZE / 2,
+    );
     while !window.should_close() {
         // Update
         let delta = window.get_frame_time();
@@ -18,7 +20,13 @@ fn main() -> Result {
         // Draw
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
-            canvas.draw_rectangle(box_position.0, box_position.1, 80, 80, Color::MAROON);
+            canvas.draw_rectangle(
+                box_position.0,
+                box_position.1,
+                BOX_SIZE,
+                BOX_SIZE,
+                Color::MAROON,
+            );
             canvas.draw_text(
                 "Use mouse wheel to move the cube up and down!",
                 10,
