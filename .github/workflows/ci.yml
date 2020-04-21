@@ -29,7 +29,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update -qq
-          sudo apt install -y libgl1-mesa-dev libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxext-dev libxfixes-dev
+          sudo apt install -y libgl-dev xorg-dev
       - name: Check warnings
         run: cargo clippy -- -D warnings
       - name: Run tests
