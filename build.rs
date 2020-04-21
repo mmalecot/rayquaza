@@ -12,32 +12,33 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     use tar::Archive;
 
     // Defines constants
-    const RAYLIB_NAME: &str = "raylib";
+    const GITHUB_DOWNLOAD_URL: &str = "https://codeload.github.com";
+    const RAYLIB_REPOSITORY_OWNER: &str = "mmalecot";
+    const RAYLIB_REPOSITORY_NAME: &str = "raylib";
     const RAYLIB_ARCHIVE_EXTENSION: &str = "tar.gz";
     const RAYLIB_VERSION: &str = "3.0.0";
-    const RAYLIB_GITHUB_REPOSITORY: &str = "mmalecot/raylib";
-    const GITHUB_CODELOAD_URL: &str = "https://codeload.github.com";
 
     // Computes paths
     let out_directory = env::var("OUT_DIR")?;
     let out_directory = Path::new(&out_directory);
     let raylib_archive_url = format!(
-        "{url}/{repository}/{extension}/{version}",
-        url = GITHUB_CODELOAD_URL,
-        repository = RAYLIB_GITHUB_REPOSITORY,
+        "{url}/{owner}/{repository}/{extension}/{reference}",
+        url = GITHUB_DOWNLOAD_URL,
+        owner = RAYLIB_REPOSITORY_OWNER,
+        repository = RAYLIB_REPOSITORY_NAME,
         extension = RAYLIB_ARCHIVE_EXTENSION,
-        version = RAYLIB_VERSION,
+        reference = RAYLIB_VERSION,
     );
     let raylib_archive_file = format!(
         "{name}-{version}.{extension}",
-        name = RAYLIB_NAME,
+        name = RAYLIB_REPOSITORY_NAME,
         version = RAYLIB_VERSION,
         extension = RAYLIB_ARCHIVE_EXTENSION
     );
     let raylib_archive_file = out_directory.join(&raylib_archive_file);
     let raylib_directory = format!(
         "{name}-{version}",
-        name = RAYLIB_NAME,
+        name = RAYLIB_REPOSITORY_NAME,
         version = RAYLIB_VERSION,
     );
     let raylib_directory = out_directory.join(&raylib_directory);
