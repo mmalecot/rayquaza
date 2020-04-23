@@ -267,11 +267,7 @@ impl Default for WindowBuilder {
             flags: Default::default(),
             width: 1280,
             height: 720,
-            title: String::from(concat!(
-                env!("CARGO_PKG_NAME"),
-                " ",
-                env!("CARGO_PKG_VERSION")
-            )),
+            title: format!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION")),
         }
     }
 }
