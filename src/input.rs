@@ -400,12 +400,14 @@ impl Window {
     }
 
     /// Returns gamepad internal name id.
-    pub fn get_gamepad_name(&self, gamepad: Gamepad) -> String {
+    pub fn get_gamepad_name(&self, gamepad: Gamepad) -> Option<String> {
         unsafe {
-            CStr::from_ptr(ffi::GetGamepadName(gamepad as i32))
-                .to_str()
-                .unwrap()
-                .to_string()
+            let name = ffi::GetGamepadName(gamepad as i32);
+            if name.is_null() {
+                None
+            } else {
+                Some(CStr::from_ptr(name).to_str().unwrap().to_string())
+            }
         }
     }
 

@@ -10,17 +10,18 @@ fn main() -> Result {
     while !window.should_close() {
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
-            if window.is_gamepad_available(Gamepad::One) {
-                canvas.draw_text(
-                    &format!("GP1: {}", window.get_gamepad_name(Gamepad::One)),
-                    10,
-                    10,
-                    20,
-                    Color::BLACK,
-                );
-            } else {
-                canvas.draw_text("GP1: None", 10, 10, 20, Color::GRAY);
-            }
+            canvas.draw_text(
+                &format!(
+                    "GP1: {}",
+                    window
+                        .get_gamepad_name(Gamepad::One)
+                        .unwrap_or_else(|| String::from("None"))
+                ),
+                10,
+                10,
+                20,
+                Color::BLACK,
+            );
             if let Some(button) = window.get_gamepad_button_pressed() {
                 canvas.draw_text(
                     &format!("Detected button: {:?}", button),
