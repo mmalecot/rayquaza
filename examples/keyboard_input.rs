@@ -2,7 +2,7 @@ use rayquaza::core::{
     color::Color, input::Key, math::Vector2, result::Result, window::WindowBuilder,
 };
 
-const BALL_SPEED: f32 = 120.0;
+const BALL_SPEED: f32 = 200.0;
 
 fn main() -> Result {
     let window = WindowBuilder::new()

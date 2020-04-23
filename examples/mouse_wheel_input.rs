@@ -1,6 +1,6 @@
 use rayquaza::core::{color::Color, result::Result, window::WindowBuilder};
 
-const BOX_SPEED: f32 = 240.0;
+const BOX_SPEED: f32 = 480.0;
 const BOX_SIZE: i32 = 80;
 
 fn main() -> Result {
