@@ -2,6 +2,7 @@
 
 use crate::{color::Color, drawing::Canvas, ffi, math::Vector2};
 
+/// Shapes.
 impl Canvas {
     /// Draws a color-filled circle.
     pub fn draw_circle(&mut self, x: i32, y: i32, radius: f32, color: impl Into<Color>) {

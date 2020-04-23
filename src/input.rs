@@ -190,6 +190,7 @@ pub enum Key {
     KeypadEqual = ffi::KEY_KP_EQUAL,
 }
 
+/// Input.
 impl Window {
     /// Detects if a key has been pressed once.
     pub fn is_key_pressed(&self, key: Key) -> bool {

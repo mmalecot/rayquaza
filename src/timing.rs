@@ -2,6 +2,7 @@
 
 use crate::{ffi, Window};
 
+/// Timing.
 impl Window {
     /// Sets target FPS (maximum).
     pub fn set_target_fps(&mut self, fps: i32) {

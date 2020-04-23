@@ -1,6 +1,6 @@
 //! Idiomatic wrapper for [raylib](https://www.raylib.com/).
 //!
-//! # Hello world
+//! # Example
 //!
 //! ```rust,no_run
 //! use rayquaza::{Color, Result, WindowBuilder};

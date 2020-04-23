@@ -29,6 +29,7 @@ impl Drop for Canvas {
     }
 }
 
+/// Drawing.
 impl Window {
     /// Draws in a canvas and swap buffers (double buffering).
     pub fn draw<F>(&self, function: F)

@@ -10,7 +10,7 @@ use crate::{
 };
 use std::{ffi::CString, path::Path, rc::Rc};
 
-/// 2D Texture.
+/// 2D texture.
 pub struct Texture {
     pub(crate) _handle: Rc<Handle>,
     pub(crate) raw: ffi::Texture2D,
@@ -34,6 +34,7 @@ impl Drop for Texture {
     }
 }
 
+/// Texture.
 impl Canvas {
     /// Draws a texture.
     pub fn draw_texture(&mut self, texture: &Texture, x: i32, y: i32, color: impl Into<Color>) {
@@ -41,6 +42,7 @@ impl Canvas {
     }
 }
 
+/// Texture.
 impl Window {
     /// Loads texture from file into GPU memory (VRAM).
     pub fn load_texture<P: AsRef<Path>>(&self, path: P) -> Result<Texture> {
