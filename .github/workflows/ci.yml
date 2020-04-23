@@ -10,13 +10,13 @@ jobs:
       matrix:
         build: [ubuntu, macos, windows]
         include:
-          - build: ubuntu
+          - build: Ubuntu
             os: ubuntu-latest
             toolchain: 1.43.0
-          - build: macos
+          - build: macOS
             os: macos-latest
             toolchain: 1.43.0
-          - build: windows
+          - build: Windows
             os: windows-latest
             toolchain: 1.43.0
     steps:
@@ -25,7 +25,8 @@ jobs:
         run: |
           rustup update ${{ matrix.toolchain }}
           rustup default ${{ matrix.toolchain }}
-      - name: Install dependencies (ubuntu)
+          rustup component add clippy
+      - name: Install dependencies (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update -qq
@@ -40,5 +41,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Install Rust (rustup)
+        run: |
+          rustup update 1.43.0
+          rustup default 1.43.0
+          rustup component add rustfmt
       - name: Check format
         run: cargo fmt -- --check
