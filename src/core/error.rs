@@ -5,4 +5,5 @@
 pub enum Error {
     WindowInitializationFailed,
     WindowAlreadyCreated,
+    TextureLoadingFailed,
 }

@@ -11,7 +11,7 @@ categories = ["api-bindings", "game-engines"]
 homepage = "https://github.com/mmalecot/rayquaza"
 documentation = "https://docs.rs/rayquaza"
 repository = "https://github.com/mmalecot/rayquaza"
-exclude = [".github/*", "examples/*"]
+exclude = [".github/*", "examples/*", "resources/*"]
 
 [profile.release]
 lto = true
@@ -34,6 +34,10 @@ static = ["cmake", "flate2", "tar", "ureq"]
 [[example]]
 name = "basic_window"
 path = "examples/core/basic_window.rs"
+
+[[example]]
+name = "gamepad_input"
+path = "examples/core/gamepad_input.rs"
 
 [[example]]
 name = "keyboard_input"

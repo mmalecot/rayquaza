@@ -4,21 +4,34 @@ use crate::{
     core::{
         drawing::Canvas,
         error::Error,
-        input::{Button, Key},
+        input::{Gamepad, GamepadAxis, GamepadButton, Key, MouseButton},
         math::Vector2,
         result::Result,
+        texture::Texture,
     },
     ffi,
 };
 use std::{
     ffi::{CStr, CString},
-    marker::PhantomData,
+    mem,
+    rc::Rc,
     sync::atomic::{AtomicBool, Ordering},
 };
 
-/// Window type.
+/// Holder of the window.
+pub(crate) struct Handle;
+
+impl Drop for Handle {
+    fn drop(&mut self) {
+        unsafe {
+            ffi::CloseWindow();
+        }
+    }
+}
+
+/// Window.
 pub struct Window {
-    _marker: PhantomData<*mut ()>,
+    handle: Rc<Handle>,
 }
 
 impl Window {
@@ -179,7 +192,7 @@ impl Window {
     }
 
     /// Draws in a canvas and swap buffers (double buffering).
-    pub fn draw<F>(&mut self, function: F)
+    pub fn draw<F>(&self, function: F)
     where
         F: FnOnce(&mut Canvas),
     {
@@ -326,22 +339,22 @@ impl Window {
     }
 
     /// Detect if a mouse button has been pressed once.
-    pub fn is_mouse_button_pressed(&self, button: Button) -> bool {
+    pub fn is_mouse_button_pressed(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonPressed(button as i32) }
     }
 
     /// Detects if a mouse button is being pressed.
-    pub fn is_mouse_button_down(&self, button: Button) -> bool {
+    pub fn is_mouse_button_down(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonDown(button as i32) }
     }
 
     /// Detects if a mouse button has been released once.
-    pub fn is_mouse_button_released(&self, button: Button) -> bool {
+    pub fn is_mouse_button_released(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonReleased(button as i32) }
     }
 
     /// Detects if a mouse button is NOT being pressed.
-    pub fn is_mouse_button_up(&self, button: Button) -> bool {
+    pub fn is_mouse_button_up(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonUp(button as i32) }
     }
 
@@ -379,13 +392,89 @@ impl Window {
     pub fn get_mouse_wheel_move(&self) -> i32 {
         unsafe { ffi::GetMouseWheelMove() }
     }
-}
 
-impl Drop for Window {
-    fn drop(&mut self) {
-        unsafe { ffi::CloseWindow() }
+    /// Detects if a gamepad is available.
+    pub fn is_gamepad_available(&self, gamepad: Gamepad) -> bool {
+        unsafe { ffi::IsGamepadAvailable(gamepad as i32) }
+    }
+
+    /// Checks gamepad name (if available).
+    pub fn is_gamepad_name(&self, gamepad: Gamepad, name: &str) -> bool {
+        unsafe {
+            let name = CString::new(name).unwrap();
+            ffi::IsGamepadName(gamepad as i32, name.as_ptr())
+        }
+    }
+
+    /// Returns gamepad internal name id.
+    pub fn get_gamepad_name(&self, gamepad: Gamepad) -> String {
+        unsafe {
+            CStr::from_ptr(ffi::GetGamepadName(gamepad as i32))
+                .to_str()
+                .unwrap()
+                .to_string()
+        }
+    }
+
+    /// Detects if a gamepad button has been pressed once.
+    pub fn is_gamepad_button_pressed(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
+        unsafe { ffi::IsGamepadButtonPressed(gamepad as i32, button as i32) }
+    }
+    /// Detects if a gamepad button is being pressed.
+    pub fn is_gamepad_button_down(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
+        unsafe { ffi::IsGamepadButtonDown(gamepad as i32, button as i32) }
+    }
+
+    /// Detects if a gamepad button has been released once.
+    pub fn is_gamepad_button_released(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
+        unsafe { ffi::IsGamepadButtonReleased(gamepad as i32, button as i32) }
+    }
+
+    /// Detects if a gamepad button is NOT being pressed.
+    pub fn is_gamepad_button_up(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
+        unsafe { ffi::IsGamepadButtonUp(gamepad as i32, button as i32) }
+    }
+
+    /// Gets the last gamepad button pressed.
+    pub fn get_gamepad_button_pressed(&self) -> Option<GamepadButton> {
+        unsafe {
+            let button = ffi::GetGamepadButtonPressed();
+            if button > 0 {
+                Some(mem::transmute(button))
+            } else {
+                None
+            }
+        }
+    }
+
+    /// Returns gamepad axis count for a gamepad.
+    pub fn get_gamepad_axis_count(&self, gamepad: Gamepad) -> i32 {
+        unsafe { ffi::GetGamepadAxisCount(gamepad as i32) }
+    }
+
+    /// Returns axis movement value for a gamepad axis.
+    pub fn get_gamepad_axis_movement(&self, gamepad: Gamepad, axis: GamepadAxis) -> f32 {
+        unsafe { ffi::GetGamepadAxisMovement(gamepad as i32, axis as i32) }
+    }
+
+    /// Loads texture from file into GPU memory (VRAM).
+    pub fn load_texture(&self, filename: &str) -> Result<Texture> {
+        unsafe {
+            let filename = CString::new(filename).unwrap();
+            let raw = ffi::LoadTexture(filename.as_ptr());
+            if raw.id != 0 {
+                Ok(Texture {
+                    _handle: self.handle.clone(),
+                    raw,
+                })
+            } else {
+                Err(Error::TextureLoadingFailed)
+            }
+        }
     }
 }
+
+static INITIALIZED: AtomicBool = AtomicBool::new(false);
 
 /// Window builder.
 pub struct WindowBuilder {
@@ -467,21 +556,20 @@ impl WindowBuilder {
     /// Builds the window.
     pub fn build(self) -> Result<Window> {
         unsafe {
-            static FIRST_CALL: AtomicBool = AtomicBool::new(true);
-            if FIRST_CALL.load(Ordering::Relaxed) {
+            if INITIALIZED.load(Ordering::Relaxed) {
+                Err(Error::WindowAlreadyCreated)
+            } else {
                 ffi::SetConfigFlags(self.flags);
                 let title = CString::new(self.title).unwrap();
                 ffi::InitWindow(self.width, self.height, title.as_ptr());
                 if ffi::IsWindowReady() {
-                    FIRST_CALL.store(false, Ordering::Relaxed);
+                    INITIALIZED.store(true, Ordering::Relaxed);
                     Ok(Window {
-                        _marker: PhantomData,
+                        handle: Rc::new(Handle),
                     })
                 } else {
                     Err(Error::WindowInitializationFailed)
                 }
-            } else {
-                Err(Error::WindowAlreadyCreated)
             }
         }
     }

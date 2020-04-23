@@ -5,7 +5,7 @@ use rayquaza::core::{
 const BALL_SPEED: f32 = 120.0;
 
 fn main() -> Result {
-    let mut window = WindowBuilder::new()
+    let window = WindowBuilder::new()
         .size(800, 450)
         .title("Keyboard input")
         .vsync()

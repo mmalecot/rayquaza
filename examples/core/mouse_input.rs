@@ -1,9 +1,9 @@
 use rayquaza::core::{
-    color::Color, input::Button, math::Vector2, result::Result, window::WindowBuilder,
+    color::Color, input::MouseButton, math::Vector2, result::Result, window::WindowBuilder,
 };
 
 fn main() -> Result {
-    let mut window = WindowBuilder::new()
+    let window = WindowBuilder::new()
         .size(800, 450)
         .title("Mouse input")
         .vsync()
@@ -13,11 +13,11 @@ fn main() -> Result {
     while !window.should_close() {
         // Update
         ball.0 = window.get_mouse_position();
-        ball.1 = if window.is_mouse_button_pressed(Button::Left) {
+        ball.1 = if window.is_mouse_button_pressed(MouseButton::Left) {
             Color::MAROON
-        } else if window.is_mouse_button_pressed(Button::Right) {
+        } else if window.is_mouse_button_pressed(MouseButton::Right) {
             Color::DARKBLUE
-        } else if window.is_mouse_button_pressed(Button::Middle) {
+        } else if window.is_mouse_button_pressed(MouseButton::Middle) {
             Color::LIME
         } else {
             ball.1

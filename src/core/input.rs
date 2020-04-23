@@ -2,6 +2,74 @@
 
 use crate::ffi;
 
+/// Kinds of mouse buttons.
+#[repr(i32)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum MouseButton {
+    Left = ffi::MOUSE_LEFT_BUTTON,
+    Right = ffi::MOUSE_RIGHT_BUTTON,
+    Middle = ffi::MOUSE_MIDDLE_BUTTON,
+}
+
+/// Gamepad number.
+#[repr(i32)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Gamepad {
+    One = ffi::GAMEPAD_PLAYER1,
+    Two = ffi::GAMEPAD_PLAYER2,
+    Three = ffi::GAMEPAD_PLAYER3,
+    Four = ffi::GAMEPAD_PLAYER4,
+}
+
+/// Kinds of gamepad axis.
+#[repr(C)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum GamepadAxis {
+    // Left stick
+    LeftX = 1,
+    LeftY,
+
+    // Right stick
+    RightX,
+    RightY,
+
+    // Pressure levels for the back triggers
+    LeftTrigger,
+    RightTrigger,
+}
+
+/// Kinds of gamepad buttons.
+#[repr(C)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum GamepadButton {
+    // Left buttons (normally D-Pad)
+    LeftFaceUp = 1,
+    LeftFaceRight,
+    LeftFaceDown,
+    LeftFaceLeft,
+
+    // Right buttons
+    RightFaceUp,
+    RightFaceRight,
+    RightFaceDown,
+    RightFaceLeft,
+
+    // Triggers
+    LeftTrigger1,
+    LeftTrigger2,
+    RightTrigger1,
+    RightTrigger2,
+
+    // Middle buttons
+    MiddleLeft,
+    Middle,
+    MiddleRight,
+
+    // Joystick press in buttons
+    MiddleLeftThumb,
+    MiddleRightThumb,
+}
+
 /// Kinds of keyboard keys.
 #[repr(i32)]
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -50,6 +118,7 @@ pub enum Key {
     X = ffi::KEY_X,
     Y = ffi::KEY_Y,
     Z = ffi::KEY_Z,
+
     // Function keys
     Space = ffi::KEY_SPACE,
     Escape = ffi::KEY_ESCAPE,
@@ -96,6 +165,7 @@ pub enum Key {
     Backslash = ffi::KEY_BACKSLASH,
     RightBracket = ffi::KEY_RIGHT_BRACKET,
     Grave = ffi::KEY_GRAVE,
+
     // Keypad key
     KeypadZero = ffi::KEY_KP_0,
     KeypadOne = ffi::KEY_KP_1,
@@ -114,13 +184,4 @@ pub enum Key {
     KeypadAdd = ffi::KEY_KP_ADD,
     KeypadEnter = ffi::KEY_KP_ENTER,
     KeypadEqual = ffi::KEY_KP_EQUAL,
-}
-
-/// Kinds of mouse buttons.
-#[repr(i32)]
-#[derive(Clone, Debug, Eq, PartialEq)]
-pub enum Button {
-    Left = ffi::MOUSE_LEFT_BUTTON,
-    Right = ffi::MOUSE_RIGHT_BUTTON,
-    Middle = ffi::MOUSE_MIDDLE_BUTTON,
 }

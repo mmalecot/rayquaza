@@ -27,7 +27,7 @@ rayquaza = "1.0.0-dev.1"
 use rayquaza::core::{color::Color, result::Result, window::WindowBuilder};
 
 fn main() -> Result {
-    let mut window = WindowBuilder::new()
+    let window = WindowBuilder::new()
         .size(800, 450)
         .title("Basic window")
         .vsync()

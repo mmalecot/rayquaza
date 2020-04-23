@@ -1,7 +1,7 @@
 //! Drawing module.
 
 use crate::{
-    core::{color::Color, math::Vector2},
+    core::{color::Color, math::Vector2, texture::Texture},
     ffi,
 };
 use std::ffi::CString;
@@ -30,6 +30,13 @@ impl Canvas {
         }
     }
 
+    /// Draws a color-filled circle.
+    pub fn draw_circle(&mut self, x: i32, y: i32, radius: f32, color: impl Into<Color>) {
+        unsafe {
+            ffi::DrawCircle(x, y, radius, color.into().into());
+        }
+    }
+
     /// Draws a color-filled circle (vector version).
     pub fn draw_circle_vec(
         &mut self,
@@ -54,6 +61,11 @@ impl Canvas {
         unsafe {
             ffi::DrawRectangle(x, y, width, height, color.into().into());
         }
+    }
+
+    /// Draws a Texture.
+    pub fn draw_texture(&mut self, texture: &Texture, x: i32, y: i32, color: impl Into<Color>) {
+        unsafe { ffi::DrawTexture(texture.raw, x, y, color.into().into()) }
     }
 }
 

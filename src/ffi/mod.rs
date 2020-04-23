@@ -119,6 +119,12 @@ pub const MOUSE_LEFT_BUTTON: i32 = 0;
 pub const MOUSE_RIGHT_BUTTON: i32 = 1;
 pub const MOUSE_MIDDLE_BUTTON: i32 = 2;
 
+// Gamepad number
+pub const GAMEPAD_PLAYER1: i32 = 0;
+pub const GAMEPAD_PLAYER2: i32 = 1;
+pub const GAMEPAD_PLAYER3: i32 = 2;
+pub const GAMEPAD_PLAYER4: i32 = 3;
+
 // System config flags
 pub const FLAG_FULLSCREEN_MODE: u32 = 2;
 pub const FLAG_WINDOW_RESIZABLE: u32 = 4;
@@ -137,6 +143,16 @@ pub struct Color {
     pub g: c_uchar,
     pub b: c_uchar,
     pub a: c_uchar,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct Texture2D {
+    pub id: c_uint,
+    pub width: c_int,
+    pub height: c_int,
+    pub mipmaps: c_int,
+    pub format: c_int,
 }
 
 #[repr(C)]
@@ -208,6 +224,18 @@ extern "C" {
     pub fn GetKeyPressed() -> c_int;
     pub fn SetExitKey(key: c_int);
 
+    // Input-related functions: gamepads
+    pub fn IsGamepadAvailable(gamepad: c_int) -> bool;
+    pub fn IsGamepadName(gamepad: c_int, name: *const c_char) -> bool;
+    pub fn GetGamepadName(gamepad: c_int) -> *const c_char;
+    pub fn IsGamepadButtonPressed(gamepad: c_int, button: c_int) -> bool;
+    pub fn IsGamepadButtonDown(gamepad: c_int, button: c_int) -> bool;
+    pub fn IsGamepadButtonReleased(gamepad: c_int, button: c_int) -> bool;
+    pub fn IsGamepadButtonUp(gamepad: c_int, button: c_int) -> bool;
+    pub fn GetGamepadButtonPressed() -> c_int;
+    pub fn GetGamepadAxisCount(gamepad: c_int) -> c_int;
+    pub fn GetGamepadAxisMovement(gamepad: c_int, axis: c_int) -> c_float;
+
     // Input-related functions: mouse
     pub fn IsMouseButtonPressed(button: c_int) -> bool;
     pub fn IsMouseButtonDown(button: c_int) -> bool;
@@ -223,8 +251,17 @@ extern "C" {
 
     // Shapes
     // Basic shapes drawing functions
+    pub fn DrawCircle(centerX: c_int, centerY: c_int, radius: f32, color: Color);
     pub fn DrawCircleV(center: Vector2, radius: f32, color: Color);
     pub fn DrawRectangle(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color);
+
+    // Textures
+    // Texture loading function
+    pub fn LoadTexture(fileName: *const c_char) -> Texture2D;
+    pub fn UnloadTexture(texture: Texture2D);
+
+    // Texture drawing functions
+    pub fn DrawTexture(texture: Texture2D, posX: c_int, posY: c_int, tint: Color);
 
     // Text
     // Text drawing functions
