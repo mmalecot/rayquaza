@@ -1,6 +1,4 @@
-use rayquaza::core::{
-    color::Color, input::Key, math::Vector2, result::Result, window::WindowBuilder,
-};
+use rayquaza::{Color, Key, Result, Vector2, WindowBuilder};
 
 const BALL_SPEED: f32 = 200.0;
 

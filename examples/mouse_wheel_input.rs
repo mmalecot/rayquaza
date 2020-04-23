@@ -1,4 +1,4 @@
-use rayquaza::core::{color::Color, result::Result, window::WindowBuilder};
+use rayquaza::{Color, Result, WindowBuilder};
 
 const BOX_SPEED: f32 = 480.0;
 const BOX_SIZE: i32 = 80;

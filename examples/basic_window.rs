@@ -1,4 +1,4 @@
-use rayquaza::core::{color::Color, result::Result, window::WindowBuilder};
+use rayquaza::{Color, Result, WindowBuilder};
 
 fn main() -> Result {
     let window = WindowBuilder::new()

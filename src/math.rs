@@ -595,7 +595,7 @@ pub fn clamp<T: PartialOrd>(value: T, min: T, max: T) -> T {
 
 #[cfg(test)]
 mod tests {
-    use crate::core::math::{self, Vector2, Vector3};
+    use crate::{clamp, Vector2, Vector3};
 
     #[test]
     fn test_vector2_new() {
@@ -679,8 +679,8 @@ mod tests {
 
     #[test]
     fn test_clamp() {
-        assert_eq!(math::clamp(200, 100, 300), 200);
-        assert_eq!(math::clamp(400, 100, 300), 300);
-        assert_eq!(math::clamp(0, 100, 300), 100);
+        assert_eq!(clamp(200, 100, 300), 200);
+        assert_eq!(clamp(400, 100, 300), 300);
+        assert_eq!(clamp(0, 100, 300), 100);
     }
 }

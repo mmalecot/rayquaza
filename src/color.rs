@@ -1,6 +1,6 @@
 //! Color module.
 
-use crate::{core::math, ffi};
+use crate::{ffi, math};
 use std::{mem, num::ParseIntError, str::FromStr};
 
 /// Convenient macro to create a color.
@@ -216,7 +216,7 @@ impl ToString for Color {
 
 #[cfg(test)]
 mod tests {
-    use crate::core::color::Color;
+    use crate::Color;
     use std::str::FromStr;
 
     #[test]
