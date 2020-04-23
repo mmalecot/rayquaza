@@ -13,8 +13,8 @@
 //!         .build()?;
 //!     while !window.should_close() {
 //!         window.draw(|canvas| {
-//!             canvas.clear_background(Color::WHITE);
-//!             canvas.draw_text("Hello world!", 268, 200, 48, Color::BLACK);
+//!             canvas.clear_background(Color::BLACK);
+//!             canvas.draw_text("Hello world!", 268, 200, 48, Color::WHITE);
 //!         });
 //!     }
 //!     Ok(())
