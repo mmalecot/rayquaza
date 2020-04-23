@@ -2,11 +2,9 @@ use rayquaza::{clamp, Color, Key, Result, Vector2, WindowBuilder};
 
 struct Ball {
     position: Vector2,
-    direction: Vector2,
+    speed: Vector2,
     radius: f32,
 }
-
-const BALL_SPEED: f32 = 64.0;
 
 fn main() -> Result {
     let window = WindowBuilder::new()
@@ -20,35 +18,34 @@ fn main() -> Result {
             window.get_screen_width() as f32 / 2.0,
             window.get_screen_height() as f32 / 2.0,
         ),
-        direction: Vector2::new(5.0, 4.0),
+        speed: Vector2::new(320.0, 256.0),
         radius: 20.0,
     };
     while !window.should_close() {
         // Updates
-        let delta = window.get_frame_time();
         if window.is_key_pressed(Key::Space) {
             pause = !pause;
         }
         if !pause {
             ball.position.x = clamp(
-                ball.direction.x * BALL_SPEED * delta + ball.position.x,
+                ball.position.x + ball.speed.x * window.get_frame_time(),
                 ball.radius,
                 window.get_screen_width() as f32 - ball.radius,
             );
             ball.position.y = clamp(
-                ball.direction.y * BALL_SPEED * delta + ball.position.y,
+                ball.position.y + ball.speed.y * window.get_frame_time(),
                 ball.radius,
                 window.get_screen_height() as f32 - ball.radius,
             );
             if ball.position.x >= window.get_screen_width() as f32 - ball.radius
                 || ball.position.x <= ball.radius
             {
-                ball.direction.x *= -1.0;
+                ball.speed.x *= -1.0;
             }
             if ball.position.y >= window.get_screen_height() as f32 - ball.radius
                 || ball.position.y <= ball.radius
             {
-                ball.direction.y *= -1.0;
+                ball.speed.y *= -1.0;
             }
         }
         // Draws
