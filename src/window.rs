@@ -1,6 +1,6 @@
 //! Window module.
 
-use crate::{error::Error, ffi, math::Vector2, result::Result};
+use crate::{ffi, math::Vector2, CreateWindowError};
 use std::{
     ffi::{CStr, CString},
     rc::Rc,
@@ -239,11 +239,11 @@ impl WindowBuilder {
     }
 
     /// Builds the window.
-    pub fn build(self) -> Result<Window> {
+    pub fn build(self) -> Result<Window, CreateWindowError> {
         unsafe {
             static INITIALIZED: AtomicBool = AtomicBool::new(false);
             if INITIALIZED.load(Ordering::Relaxed) {
-                Err(Error::WindowAlreadyCreated)
+                Err(CreateWindowError::AlreadyCreated)
             } else {
                 ffi::SetConfigFlags(self.flags);
                 let title = CString::new(self.title).unwrap();
@@ -254,7 +254,7 @@ impl WindowBuilder {
                         handle: Rc::new(Handle),
                     })
                 } else {
-                    Err(Error::WindowInitializationFailed)
+                    Err(CreateWindowError::InitializationFailed)
                 }
             }
         }

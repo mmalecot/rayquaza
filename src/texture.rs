@@ -4,9 +4,8 @@ use crate::{
     color::Color,
     drawing::Canvas,
     ffi,
-    result::Result,
     window::{Handle, Window},
-    Error,
+    LoadTextureError,
 };
 use std::{ffi::CString, path::Path, rc::Rc};
 
@@ -45,7 +44,7 @@ impl Canvas {
 /// Texture.
 impl Window {
     /// Loads texture from file into GPU memory (VRAM).
-    pub fn load_texture<P: AsRef<Path>>(&self, path: P) -> Result<Texture> {
+    pub fn load_texture<P: AsRef<Path>>(&self, path: P) -> Result<Texture, LoadTextureError> {
         unsafe {
             let path = CString::new(path.as_ref().display().to_string()).unwrap();
             let raw = ffi::LoadTexture(path.as_ptr());
@@ -55,7 +54,7 @@ impl Window {
                     raw,
                 })
             } else {
-                Err(Error::TextureLoadingFailed)
+                Err(LoadTextureError::ReadFailed)
             }
         }
     }
