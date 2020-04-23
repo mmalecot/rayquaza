@@ -17,16 +17,10 @@ exclude = [".github/*", "examples/*", "resources/*"]
 lto = true
 
 [build-dependencies]
-cmake = { version = "0.1", default-features = false, optional = true }
-flate2 = { version = "1.0", default-features = false, features = ["rust_backend"], optional = true }
-tar = { version = "0.4", default-features = false, optional = true }
-ureq = { version = "0.12", default-features = false, features = ["tls"], optional = true }
+cmake = { version = "0.1", default-features = false }
+flate2 = { version = "1.0", default-features = false, features = ["rust_backend"] }
+tar = { version = "0.4", default-features = false }
+ureq = { version = "0.12", default-features = false, features = ["tls"] }
 
 [features]
-default = ["static"]
-
-# Downloads, compiles and links statically raylib.
-# It requires to have CMake and a C compiler to build.
-# It will create a program without external dependencies (except for the lowest level).
-# If disabled, raylib will have to be installed on the target system.
-static = ["cmake", "flate2", "tar", "ureq"]
+default = []
