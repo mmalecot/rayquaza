@@ -133,22 +133,26 @@ impl Window {
     }
 
     /// Gets the human-readable name of monitor.
-    pub fn get_monitor_name(&self, monitor: i32) -> String {
+    pub fn get_monitor_name(&self, monitor: i32) -> Option<String> {
         unsafe {
-            CStr::from_ptr(ffi::GetMonitorName(monitor))
-                .to_str()
-                .unwrap()
-                .to_string()
+            let name = ffi::GetMonitorName(monitor);
+            if name.is_null() {
+                None
+            } else {
+                Some(CStr::from_ptr(name).to_str().unwrap().to_string())
+            }
         }
     }
 
     /// Gets clipboard text content.
-    pub fn get_clipboard(&self) -> String {
+    pub fn get_clipboard(&self) -> Option<String> {
         unsafe {
-            CStr::from_ptr(ffi::GetClipboardText())
-                .to_str()
-                .unwrap()
-                .to_string()
+            let clipboard = ffi::GetClipboardText();
+            if clipboard.is_null() {
+                None
+            } else {
+                Some(CStr::from_ptr(clipboard).to_str().unwrap().to_string())
+            }
         }
     }
 
