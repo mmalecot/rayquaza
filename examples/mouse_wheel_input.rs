@@ -14,10 +14,10 @@ fn main() -> Result {
         window.get_screen_height() / 2 - BOX_SIZE / 2,
     );
     while !window.should_close() {
-        // Update
+        // Updates
         let delta = window.get_frame_time();
         position.1 -= (window.get_mouse_wheel_move() as f32 * BOX_SPEED * delta) as i32;
-        // Draw
+        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_rectangle(position.0, position.1, BOX_SIZE, BOX_SIZE, Color::MAROON);

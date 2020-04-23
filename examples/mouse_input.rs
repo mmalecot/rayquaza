@@ -7,7 +7,6 @@ struct Ball {
 
 fn main() -> Result {
     let window = WindowBuilder::new()
-        .size(800, 450)
         .title("Mouse input")
         .resizable()
         .vsync()
@@ -18,7 +17,7 @@ fn main() -> Result {
         color: Color::DARKBLUE,
     };
     while !window.should_close() {
-        // Update
+        // Updates
         ball.position = window.get_mouse_position();
         ball.color = if window.is_mouse_button_pressed(MouseButton::Left) {
             Color::MAROON
@@ -29,7 +28,7 @@ fn main() -> Result {
         } else {
             ball.color
         };
-        // Draw
+        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_circle_vec(ball.position, 40.0, ball.color);

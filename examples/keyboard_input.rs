@@ -14,7 +14,7 @@ fn main() -> Result {
         window.get_screen_height() as f32 / 2.0,
     );
     while !window.should_close() {
-        // Update
+        // Updates
         let delta = window.get_frame_time();
         if window.is_key_down(Key::Right) {
             position.x += BALL_SPEED * delta;
@@ -28,7 +28,7 @@ fn main() -> Result {
         if window.is_key_down(Key::Down) {
             position.y += BALL_SPEED * delta;
         }
-        // Draw
+        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_circle_vec(position, 50.0, Color::MAROON);

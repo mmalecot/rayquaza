@@ -2,7 +2,6 @@ use rayquaza::{Color, Result, WindowBuilder};
 
 fn main() -> Result {
     let window = WindowBuilder::new()
-        .size(800, 450)
         .title("Draw texture")
         .resizable()
         .vsync()
