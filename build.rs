@@ -1,23 +1,21 @@
-#[cfg(feature = "static")]
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Imports items
-    use cmake::Config;
-    use flate2::read::GzDecoder;
-    use std::{
-        env,
-        fs::{self, File},
-        io,
-        path::Path,
-    };
-    use tar::Archive;
+use cmake::Config;
+use flate2::read::GzDecoder;
+use std::{
+    env,
+    error::Error,
+    fs::{self, File},
+    io,
+    path::Path,
+};
+use tar::Archive;
 
-    // Defines constants
-    const GITHUB_DOWNLOAD_URL: &str = "https://codeload.github.com";
-    const RAYLIB_REPOSITORY_OWNER: &str = "mmalecot";
-    const RAYLIB_REPOSITORY_NAME: &str = "raylib";
-    const RAYLIB_ARCHIVE_EXTENSION: &str = "tar.gz";
-    const RAYLIB_VERSION: &str = "3.0.0";
+const GITHUB_DOWNLOAD_URL: &str = "https://codeload.github.com";
+const RAYLIB_REPOSITORY_OWNER: &str = "mmalecot";
+const RAYLIB_REPOSITORY_NAME: &str = "raylib";
+const RAYLIB_ARCHIVE_EXTENSION: &str = "tar.gz";
+const RAYLIB_VERSION: &str = "3.0.0";
 
+fn main() -> Result<(), Box<dyn Error>> {
     // Computes paths
     let out_directory = env::var("OUT_DIR")?;
     let out_directory = Path::new(&out_directory);
@@ -130,10 +128,4 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("cargo:rustc-link-lib=framework=CoreVideo");
     }
     Ok(())
-}
-
-#[cfg(not(feature = "static"))]
-fn main() {
-    // Links dynamically raylib
-    println!("cargo:rustc-link-lib=raylib");
 }
