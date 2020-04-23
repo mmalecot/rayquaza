@@ -4,16 +4,17 @@ use crate::{
     core::{color::Color, math::Vector2, texture::Texture},
     ffi,
 };
-use std::ffi::CString;
+use std::{ffi::CString, marker::PhantomData};
 
-pub struct Canvas;
+/// Canvas.
+pub struct Canvas(PhantomData<*const ()>);
 
 impl Canvas {
     /// Creates an new canvas to start drawing.
     pub(crate) fn new() -> Canvas {
         unsafe {
             ffi::BeginDrawing();
-            Canvas
+            Canvas(PhantomData)
         }
     }
 
