@@ -14,6 +14,7 @@ use crate::{
 use std::{
     ffi::{CStr, CString},
     mem,
+    path::Path,
     rc::Rc,
     sync::atomic::{AtomicBool, Ordering},
 };
@@ -458,10 +459,10 @@ impl Window {
     }
 
     /// Loads texture from file into GPU memory (VRAM).
-    pub fn load_texture(&self, filename: &str) -> Result<Texture> {
+    pub fn load_texture<P: AsRef<Path>>(&self, path: P) -> Result<Texture> {
         unsafe {
-            let filename = CString::new(filename).unwrap();
-            let raw = ffi::LoadTexture(filename.as_ptr());
+            let path = CString::new(path.as_ref().display().to_string()).unwrap();
+            let raw = ffi::LoadTexture(path.as_ptr());
             if raw.id != 0 {
                 Ok(Texture {
                     _handle: self.handle.clone(),
