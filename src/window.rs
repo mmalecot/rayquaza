@@ -265,8 +265,8 @@ impl Default for WindowBuilder {
     fn default() -> WindowBuilder {
         WindowBuilder {
             flags: Default::default(),
-            width: 1280,
-            height: 720,
+            width: 800,
+            height: 450,
             title: format!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION")),
         }
     }
