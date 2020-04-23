@@ -4,7 +4,7 @@
 [![Crates.io](https://img.shields.io/crates/v/rayquaza)](https://crates.io/crates/rayquaza)
 [![Docs.rs](https://docs.rs/rayquaza/badge.svg)](https://docs.rs/rayquaza)
 ![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)
-![Rust](https://img.shields.io/badge/rust-1.42+-blueviolet.svg?logo=rust)
+![Rust](https://img.shields.io/badge/rust-1.43+-blueviolet.svg?logo=rust)
 
 ![Logo](logo/256x256.png)
 

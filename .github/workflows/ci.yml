@@ -12,13 +12,13 @@ jobs:
         include:
           - build: ubuntu
             os: ubuntu-latest
-            toolchain: stable
+            toolchain: 1.43.0
           - build: macos
             os: macos-latest
-            toolchain: stable
+            toolchain: 1.43.0
           - build: windows
             os: windows-latest
-            toolchain: stable
+            toolchain: 1.43.0
     steps:
       - uses: actions/checkout@v1
       - name: Install Rust (rustup)
