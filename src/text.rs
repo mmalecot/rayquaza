@@ -5,6 +5,13 @@ use std::ffi::CString;
 
 /// Text.
 impl Canvas {
+    /// Shows current FPS.
+    pub fn draw_fps(&mut self, x: i32, y: i32) {
+        unsafe {
+            ffi::DrawFPS(x, y);
+        }
+    }
+
     /// Draws text using default font.
     pub fn draw_text(&mut self, text: &str, x: i32, y: i32, size: i32, color: impl Into<Color>) {
         unsafe {

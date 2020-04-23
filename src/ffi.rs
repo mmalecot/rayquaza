@@ -251,9 +251,44 @@ extern "C" {
 
     // Shapes
     // Basic shapes drawing functions
+    pub fn DrawPixel(posX: c_int, posY: c_int, color: Color);
+    pub fn DrawPixelV(position: Vector2, color: Color);
+    pub fn DrawLine(
+        startPosX: c_int,
+        startPosY: c_int,
+        endPosX: c_int,
+        endPosY: c_int,
+        color: Color,
+    );
     pub fn DrawCircle(centerX: c_int, centerY: c_int, radius: f32, color: Color);
+    pub fn DrawCircleGradient(
+        centerX: c_int,
+        centerY: c_int,
+        radius: f32,
+        color1: Color,
+        color2: Color,
+    );
     pub fn DrawCircleV(center: Vector2, radius: f32, color: Color);
+    pub fn DrawCircleLines(centerX: c_int, centerY: c_int, radius: f32, color: Color);
     pub fn DrawRectangle(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color);
+    pub fn DrawRectangleLines(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color);
+    pub fn DrawRectangleGradientH(
+        posX: c_int,
+        posY: c_int,
+        width: c_int,
+        height: c_int,
+        color1: Color,
+        color2: Color,
+    );
+    pub fn DrawTriangle(v1: Vector2, v2: Vector2, v3: Vector2, color: Color);
+    pub fn DrawTriangleLines(v1: Vector2, v2: Vector2, v3: Vector2, color: Color);
+    pub fn DrawPoly(
+        center: Vector2,
+        sides: c_int,
+        radius: c_float,
+        rotation: c_float,
+        color: Color,
+    );
 
     // Textures
     // Texture loading function
@@ -265,5 +300,6 @@ extern "C" {
 
     // Text
     // Text drawing functions
+    pub fn DrawFPS(x: c_int, y: c_int);
     pub fn DrawText(text: *const c_char, posX: c_int, posY: c_int, fontSize: c_int, color: Color);
 }
