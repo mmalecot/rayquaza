@@ -1,11 +1,7 @@
 use rayquaza::{Color, Result, WindowBuilder};
 
 fn main() -> Result {
-    let window = WindowBuilder::new()
-        .size(800, 450)
-        .title("Basic window")
-        .vsync()
-        .build()?;
+    let window = WindowBuilder::new().title("Basic window").vsync().build()?;
     while !window.should_close() {
         window.draw(|canvas| {
             canvas.clear_background(Color::BLACK);

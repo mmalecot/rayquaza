@@ -2,7 +2,6 @@ use rayquaza::{Color, Gamepad, Result, WindowBuilder};
 
 fn main() -> Result {
     let window = WindowBuilder::new()
-        .size(800, 450)
         .title("Gamepad input")
         .vsync()
         .msaa_4x()

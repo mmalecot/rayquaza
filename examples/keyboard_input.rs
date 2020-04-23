@@ -4,7 +4,6 @@ const BALL_SPEED: f32 = 200.0;
 
 fn main() -> Result {
     let window = WindowBuilder::new()
-        .size(800, 450)
         .title("Keyboard input")
         .vsync()
         .msaa_4x()

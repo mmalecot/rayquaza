@@ -5,7 +5,6 @@ const BOX_SIZE: i32 = 80;
 
 fn main() -> Result {
     let window = WindowBuilder::new()
-        .size(800, 450)
         .title("Mouse wheel input")
         .vsync()
         .build()?;
