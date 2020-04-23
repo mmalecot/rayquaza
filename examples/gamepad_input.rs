@@ -29,9 +29,9 @@ fn main() -> Result {
                     420,
                     20,
                     Color::RED,
-                )
+                );
             } else {
-                canvas.draw_text("Detected button: None", 10, 420, 20, Color::GRAY)
+                canvas.draw_text("Detected button: None", 10, 420, 20, Color::GRAY);
             }
         });
     }
