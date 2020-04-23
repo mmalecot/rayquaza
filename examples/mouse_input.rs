@@ -11,6 +11,7 @@ fn main() -> Result {
     let window = WindowBuilder::new()
         .size(800, 450)
         .title("Mouse input")
+        .resizable()
         .vsync()
         .msaa_4x()
         .build()?;
