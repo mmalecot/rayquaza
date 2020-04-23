@@ -61,7 +61,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Compiles raylib
     let mut config = Config::new(&raylib_directory);
     let build_directory = config
-        .define("CMAKE_BUILD_TYPE", "Release")
         .define("CMAKE_INSTALL_LIBDIR", "lib")
         .define("BUILD_EXAMPLES", "OFF")
         .define("BUILD_GAMES", "OFF")
