@@ -9,8 +9,8 @@ fn main() -> Result {
         .msaa_4x()
         .build()?;
     let mut position = Vector2::new(
-        window.get_screen_width() as f32 / 2.0,
-        window.get_screen_height() as f32 / 2.0,
+        window.get_width() as f32 / 2.0,
+        window.get_height() as f32 / 2.0,
     );
     while !window.should_close() {
         // Updates

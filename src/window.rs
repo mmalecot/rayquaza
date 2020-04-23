@@ -83,7 +83,7 @@ impl Window {
     }
 
     /// Sets window minimum dimensions.
-    pub fn set_min_size(&mut self, width: i32, height: i32) {
+    pub fn set_minimum_size(&mut self, width: i32, height: i32) {
         unsafe { ffi::SetWindowMinSize(width, height) }
     }
 
@@ -92,13 +92,13 @@ impl Window {
         unsafe { ffi::SetWindowSize(width, height) }
     }
 
-    /// Gets current screen width.
-    pub fn get_screen_width(&self) -> i32 {
+    /// Gets screen width.
+    pub fn get_width(&self) -> i32 {
         unsafe { ffi::GetScreenWidth() }
     }
 
-    /// Gets current screen height.
-    pub fn get_screen_height(&self) -> i32 {
+    /// Gets screen height.
+    pub fn get_height(&self) -> i32 {
         unsafe { ffi::GetScreenHeight() }
     }
 

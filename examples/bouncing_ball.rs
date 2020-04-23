@@ -15,8 +15,8 @@ fn main() -> Result {
     let mut pause = true;
     let mut ball = Ball {
         position: Vector2::new(
-            window.get_screen_width() as f32 / 2.0,
-            window.get_screen_height() as f32 / 2.0,
+            window.get_width() as f32 / 2.0,
+            window.get_height() as f32 / 2.0,
         ),
         speed: Vector2::new(320.0, 256.0),
         radius: 20.0,
@@ -30,19 +30,19 @@ fn main() -> Result {
             ball.position.x = clamp(
                 ball.position.x + ball.speed.x * window.get_frame_time(),
                 ball.radius,
-                window.get_screen_width() as f32 - ball.radius,
+                window.get_width() as f32 - ball.radius,
             );
             ball.position.y = clamp(
                 ball.position.y + ball.speed.y * window.get_frame_time(),
                 ball.radius,
-                window.get_screen_height() as f32 - ball.radius,
+                window.get_height() as f32 - ball.radius,
             );
-            if ball.position.x >= window.get_screen_width() as f32 - ball.radius
+            if ball.position.x >= window.get_width() as f32 - ball.radius
                 || ball.position.x <= ball.radius
             {
                 ball.speed.x *= -1.0;
             }
-            if ball.position.y >= window.get_screen_height() as f32 - ball.radius
+            if ball.position.y >= window.get_height() as f32 - ball.radius
                 || ball.position.y <= ball.radius
             {
                 ball.speed.y *= -1.0;
@@ -55,7 +55,7 @@ fn main() -> Result {
             canvas.draw_text(
                 "PRESS SPACE to PAUSE BALL MOVEMENT",
                 10,
-                window.get_screen_height() - 25,
+                window.get_height() - 25,
                 20,
                 Color::LIGHTGRAY,
             );

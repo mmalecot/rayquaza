@@ -9,8 +9,8 @@ fn main() -> Result {
         .vsync()
         .build()?;
     let mut position = (
-        window.get_screen_width() / 2 - BOX_SIZE / 2,
-        window.get_screen_height() / 2 - BOX_SIZE / 2,
+        window.get_width() / 2 - BOX_SIZE / 2,
+        window.get_height() / 2 - BOX_SIZE / 2,
     );
     while !window.should_close() {
         // Updates
