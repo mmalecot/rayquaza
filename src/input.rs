@@ -193,21 +193,25 @@ pub enum Key {
 /// Input.
 impl Window {
     /// Detects if a key has been pressed once.
+    #[inline]
     pub fn is_key_pressed(&self, key: Key) -> bool {
         unsafe { ffi::IsKeyPressed(key as i32) }
     }
 
     /// Detects if a key is being pressed.
+    #[inline]
     pub fn is_key_down(&self, key: Key) -> bool {
         unsafe { ffi::IsKeyDown(key as i32) }
     }
 
     /// Detects if a key has been released once.
+    #[inline]
     pub fn is_key_released(&self, key: Key) -> bool {
         unsafe { ffi::IsKeyReleased(key as i32) }
     }
 
     /// Detects if a key is NOT being pressed
+    #[inline]
     pub fn is_key_up(&self, key: Key) -> bool {
         unsafe { ffi::IsKeyUp(key as i32) }
     }
@@ -327,66 +331,79 @@ impl Window {
     }
 
     /// Sets a custom key to exit program (default is ESC).
+    #[inline]
     pub fn set_exit_key(&mut self, key: Key) {
         unsafe { ffi::SetExitKey(key as i32) }
     }
 
     /// Detect if a mouse button has been pressed once.
+    #[inline]
     pub fn is_mouse_button_pressed(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonPressed(button as i32) }
     }
 
     /// Detects if a mouse button is being pressed.
+    #[inline]
     pub fn is_mouse_button_down(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonDown(button as i32) }
     }
 
     /// Detects if a mouse button has been released once.
+    #[inline]
     pub fn is_mouse_button_released(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonReleased(button as i32) }
     }
 
     /// Detects if a mouse button is NOT being pressed.
+    #[inline]
     pub fn is_mouse_button_up(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonUp(button as i32) }
     }
 
     /// Returns mouse position X.
+    #[inline]
     pub fn get_mouse_x(&self) -> i32 {
         unsafe { ffi::GetMouseX() }
     }
 
     /// Returns mouse position Y.
+    #[inline]
     pub fn get_mouse_y(&self) -> i32 {
         unsafe { ffi::GetMouseY() }
     }
 
     /// Returns mouse position XY.
+    #[inline]
     pub fn get_mouse_position(&self) -> Vector2 {
         unsafe { ffi::GetMousePosition().into() }
     }
 
     /// Sets mouse position XY.
+    #[inline]
     pub fn set_mouse_position(&mut self, x: i32, y: i32) {
         unsafe { ffi::SetMousePosition(x, y) }
     }
 
     /// Sets mouse offset.
+    #[inline]
     pub fn set_mouse_offset(&mut self, x: i32, y: i32) {
         unsafe { ffi::SetMouseOffset(x, y) }
     }
 
     /// Sets mouse scaling.
+    #[inline]
     pub fn set_mouse_scale(&mut self, x: f32, y: f32) {
         unsafe { ffi::SetMouseScale(x, y) }
     }
 
     /// Returns mouse wheel movement Y.
+    #[inline]
     pub fn get_mouse_wheel_move(&self) -> i32 {
         unsafe { ffi::GetMouseWheelMove() }
     }
 
     /// Detects if a gamepad is available.
+    #[inline]
     pub fn is_gamepad_available(&self, gamepad: Gamepad) -> bool {
         unsafe { ffi::IsGamepadAvailable(gamepad as i32) }
     }
@@ -412,6 +429,7 @@ impl Window {
     }
 
     /// Detects if a gamepad button has been pressed once.
+    #[inline]
     pub fn is_gamepad_button_pressed(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
         unsafe { ffi::IsGamepadButtonPressed(gamepad as i32, button as i32) }
     }
@@ -421,11 +439,13 @@ impl Window {
     }
 
     /// Detects if a gamepad button has been released once.
+    #[inline]
     pub fn is_gamepad_button_released(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
         unsafe { ffi::IsGamepadButtonReleased(gamepad as i32, button as i32) }
     }
 
     /// Detects if a gamepad button is NOT being pressed.
+    #[inline]
     pub fn is_gamepad_button_up(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
         unsafe { ffi::IsGamepadButtonUp(gamepad as i32, button as i32) }
     }
@@ -443,11 +463,13 @@ impl Window {
     }
 
     /// Returns gamepad axis count for a gamepad.
+    #[inline]
     pub fn get_gamepad_axis_count(&self, gamepad: Gamepad) -> i32 {
         unsafe { ffi::GetGamepadAxisCount(gamepad as i32) }
     }
 
     /// Returns axis movement value for a gamepad axis.
+    #[inline]
     pub fn get_gamepad_axis_movement(&self, gamepad: Gamepad, axis: GamepadAxis) -> f32 {
         unsafe { ffi::GetGamepadAxisMovement(gamepad as i32, axis as i32) }
     }
