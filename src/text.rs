@@ -6,6 +6,7 @@ use std::ffi::CString;
 /// Text.
 impl Canvas {
     /// Shows current FPS.
+    #[inline]
     pub fn draw_fps(&mut self, x: i32, y: i32) {
         unsafe {
             ffi::DrawFPS(x, y);

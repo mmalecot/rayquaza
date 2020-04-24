@@ -25,41 +25,49 @@ pub struct Window {
 
 impl Window {
     /// Checks if Escape key pressed or Close icon pressed.
+    #[inline]
     pub fn should_close(&self) -> bool {
         unsafe { ffi::WindowShouldClose() }
     }
 
     /// Checks if window has been minimized (or lost focus).
+    #[inline]
     pub fn is_minimized(&self) -> bool {
         unsafe { ffi::IsWindowMinimized() }
     }
 
     /// Checks if window has been resized.
+    #[inline]
     pub fn is_resized(&self) -> bool {
         unsafe { ffi::IsWindowResized() }
     }
 
     /// Checks if window is currently hidden.
+    #[inline]
     pub fn is_hidden(&self) -> bool {
         unsafe { ffi::IsWindowHidden() }
     }
 
     /// Checks if window is currently fullscreen.
+    #[inline]
     pub fn is_fullscreen(&self) -> bool {
         unsafe { ffi::IsWindowFullscreen() }
     }
 
     /// Toggles fullscreen mode.
+    #[inline]
     pub fn toggle_fullscreen(&mut self) {
         unsafe { ffi::ToggleFullscreen() }
     }
 
     /// Shows the window.
+    #[inline]
     pub fn show(&mut self) {
         unsafe { ffi::UnhideWindow() }
     }
 
     /// Hides the window.
+    #[inline]
     pub fn hide(&mut self) {
         unsafe { ffi::HideWindow() }
     }
@@ -73,61 +81,73 @@ impl Window {
     }
 
     /// Sets window position on screen.
+    #[inline]
     pub fn set_position(&mut self, x: i32, y: i32) {
         unsafe { ffi::SetWindowPosition(x, y) }
     }
 
     /// Sets monitor for the current window.
+    #[inline]
     pub fn set_monitor(&mut self, monitor: i32) {
         unsafe { ffi::SetWindowMonitor(monitor) }
     }
 
     /// Sets window minimum dimensions.
+    #[inline]
     pub fn set_minimum_size(&mut self, width: i32, height: i32) {
         unsafe { ffi::SetWindowMinSize(width, height) }
     }
 
     /// Sets window dimensions.
+    #[inline]
     pub fn set_size(&mut self, width: i32, height: i32) {
         unsafe { ffi::SetWindowSize(width, height) }
     }
 
     /// Gets screen width.
+    #[inline]
     pub fn get_width(&self) -> i32 {
         unsafe { ffi::GetScreenWidth() }
     }
 
     /// Gets screen height.
+    #[inline]
     pub fn get_height(&self) -> i32 {
         unsafe { ffi::GetScreenHeight() }
     }
 
     /// Gets number of connected monitors.
+    #[inline]
     pub fn get_monitor_count(&self) -> i32 {
         unsafe { ffi::GetMonitorCount() }
     }
 
     /// Gets monitor width.
+    #[inline]
     pub fn get_monitor_width(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorWidth(monitor) }
     }
 
     /// Gets monitor height.
+    #[inline]
     pub fn get_monitor_height(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorHeight(monitor) }
     }
 
     /// Gets monitor physical width in millimetres.
+    #[inline]
     pub fn get_monitor_physical_width(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorPhysicalWidth(monitor) }
     }
 
     /// Gets monitor physical height in millimetres
+    #[inline]
     pub fn get_monitor_physical_height(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorPhysicalHeight(monitor) }
     }
 
     /// Gets window position XY on monitor.
+    #[inline]
     pub fn get_position(&self) -> Vector2 {
         unsafe { ffi::GetWindowPosition().into() }
     }

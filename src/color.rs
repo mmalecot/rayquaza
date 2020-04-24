@@ -60,6 +60,7 @@ impl Color {
     }
 
     /// Color fade-in or fade-out (alpha goes from 0.0 to 1.0).
+    #[inline]
     pub fn fade(self, alpha: f32) -> Color {
         color!(
             self.red,
@@ -106,6 +107,7 @@ impl From<(u8, u8, u8)> for Color {
 }
 
 impl From<i32> for Color {
+    #[inline]
     fn from(value: i32) -> Color {
         color!(
             ((value >> 16) & 0xff) as u8,
@@ -117,6 +119,7 @@ impl From<i32> for Color {
 }
 
 impl From<u32> for Color {
+    #[inline]
     fn from(value: u32) -> Color {
         color!(
             ((value >> 24) & 0xff) as u8,
@@ -128,6 +131,7 @@ impl From<u32> for Color {
 }
 
 impl From<ffi::Color> for Color {
+    #[inline]
     fn from(color: ffi::Color) -> Color {
         unsafe { mem::transmute(color) }
     }
@@ -178,12 +182,14 @@ impl Into<(u8, u8, u8)> for Color {
 }
 
 impl Into<i32> for Color {
+    #[inline]
     fn into(self) -> i32 {
         ((self.red as i32) << 16) | ((self.green as i32) << 8) | self.blue as i32
     }
 }
 
 impl Into<u32> for Color {
+    #[inline]
     fn into(self) -> u32 {
         ((self.red as u32) << 24)
             | ((self.green as u32) << 16)
@@ -193,12 +199,14 @@ impl Into<u32> for Color {
 }
 
 impl Into<ffi::Color> for Color {
+    #[inline]
     fn into(self) -> ffi::Color {
         unsafe { mem::transmute(self) }
     }
 }
 
 impl Into<ffi::Color> for &Color {
+    #[inline]
     fn into(self) -> ffi::Color {
         self.clone().into()
     }

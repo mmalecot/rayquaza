@@ -16,6 +16,7 @@ impl Canvas {
     }
 
     /// Sets background color.
+    #[inline]
     pub fn clear_background(&mut self, color: impl Into<Color>) {
         unsafe { ffi::ClearBackground(color.into().into()) }
     }

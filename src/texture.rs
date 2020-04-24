@@ -36,6 +36,7 @@ impl Drop for Texture {
 /// Texture.
 impl Canvas {
     /// Draws a texture.
+    #[inline]
     pub fn draw_texture(&mut self, texture: &Texture, x: i32, y: i32, color: impl Into<Color>) {
         unsafe { ffi::DrawTexture(texture.raw, x, y, color.into().into()) }
     }
