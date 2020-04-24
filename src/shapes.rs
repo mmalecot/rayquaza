@@ -255,6 +255,7 @@ impl Canvas {
 
     /// Draws ring.
     #[inline]
+    #[allow(clippy::too_many_arguments)]
     pub fn draw_ring(
         &mut self,
         center: impl Into<Vector2>,
@@ -280,6 +281,7 @@ impl Canvas {
 
     /// Draws ring out.
     #[inline]
+    #[allow(clippy::too_many_arguments)]
     pub fn draw_ring_lines(
         &mut self,
         center: impl Into<Vector2>,
