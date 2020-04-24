@@ -147,6 +147,15 @@ pub struct Color {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct Rectangle {
+    pub x: c_float,
+    pub y: c_float,
+    pub width: c_float,
+    pub height: c_float,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct Texture2D {
     pub id: c_uint,
     pub width: c_int,
@@ -260,7 +269,27 @@ extern "C" {
         endPosY: c_int,
         color: Color,
     );
+    pub fn DrawLineV(startPos: Vector2, endPos: Vector2, color: Color);
+    pub fn DrawLineEx(startPos: Vector2, endPos: Vector2, thick: c_float, color: Color);
+    pub fn DrawLineBezier(startPos: Vector2, endPos: Vector2, thick: c_float, color: Color);
+    pub fn DrawLineStrip(points: *mut Vector2, numPoints: c_int, color: Color);
     pub fn DrawCircle(centerX: c_int, centerY: c_int, radius: f32, color: Color);
+    pub fn DrawCircleSector(
+        center: Vector2,
+        radius: c_float,
+        startAngle: c_int,
+        endAngle: c_int,
+        segments: c_int,
+        color: Color,
+    );
+    pub fn DrawCircleSectorLines(
+        center: Vector2,
+        radius: c_float,
+        startAngle: c_int,
+        endAngle: c_int,
+        segments: c_int,
+        color: Color,
+    );
     pub fn DrawCircleGradient(
         centerX: c_int,
         centerY: c_int,
@@ -270,8 +299,50 @@ extern "C" {
     );
     pub fn DrawCircleV(center: Vector2, radius: f32, color: Color);
     pub fn DrawCircleLines(centerX: c_int, centerY: c_int, radius: f32, color: Color);
+    pub fn DrawEllipse(
+        centerX: c_int,
+        centerY: c_int,
+        radiusH: c_float,
+        radiusV: c_float,
+        color: Color,
+    );
+    pub fn DrawEllipseLines(
+        centerX: c_int,
+        centerY: c_int,
+        radiusH: c_float,
+        radiusV: c_float,
+        color: Color,
+    );
+    pub fn DrawRing(
+        center: Vector2,
+        innerRadius: c_float,
+        outerRadius: c_float,
+        startAngle: c_int,
+        endAngle: c_int,
+        segments: c_int,
+        color: Color,
+    );
+    pub fn DrawRingLines(
+        center: Vector2,
+        innerRadius: c_float,
+        outerRadius: c_float,
+        startAngle: c_int,
+        endAngle: c_int,
+        segments: c_int,
+        color: Color,
+    );
     pub fn DrawRectangle(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color);
-    pub fn DrawRectangleLines(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color);
+    pub fn DrawRectangleV(position: Vector2, size: Vector2, color: Color);
+    pub fn DrawRectangleRec(rec: Rectangle, color: Color);
+    pub fn DrawRectanglePro(rec: Rectangle, origin: Vector2, rotation: c_float, color: Color);
+    pub fn DrawRectangleGradientV(
+        posX: c_int,
+        posY: c_int,
+        width: c_int,
+        height: c_int,
+        color1: Color,
+        color2: Color,
+    );
     pub fn DrawRectangleGradientH(
         posX: c_int,
         posY: c_int,
@@ -280,9 +351,34 @@ extern "C" {
         color1: Color,
         color2: Color,
     );
+    pub fn DrawRectangleGradientEx(
+        rec: Rectangle,
+        col1: Color,
+        col2: Color,
+        col3: Color,
+        col4: Color,
+    );
+    pub fn DrawRectangleLines(posX: c_int, posY: c_int, width: c_int, height: c_int, color: Color);
+    pub fn DrawRectangleLinesEx(rec: Rectangle, lineThick: c_int, color: Color);
+    pub fn DrawRectangleRounded(rec: Rectangle, roundness: c_float, segments: c_int, color: Color);
+    pub fn DrawRectangleRoundedLines(
+        rec: Rectangle,
+        roundness: c_float,
+        segments: c_int,
+        color: Color,
+    );
     pub fn DrawTriangle(v1: Vector2, v2: Vector2, v3: Vector2, color: Color);
     pub fn DrawTriangleLines(v1: Vector2, v2: Vector2, v3: Vector2, color: Color);
+    pub fn DrawTriangleFan(points: *mut Vector2, numPoints: c_int, color: Color);
+    pub fn DrawTriangleStrip(points: *mut Vector2, pointsCount: c_int, color: Color);
     pub fn DrawPoly(
+        center: Vector2,
+        sides: c_int,
+        radius: c_float,
+        rotation: c_float,
+        color: Color,
+    );
+    pub fn DrawPolyLines(
         center: Vector2,
         sides: c_int,
         radius: c_float,

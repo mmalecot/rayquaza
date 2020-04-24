@@ -7,6 +7,53 @@ use std::{
     ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
+/// Rectangle.
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Rectangle {
+    pub x: f32,
+    pub y: f32,
+    pub width: f32,
+    pub height: f32,
+}
+
+impl Rectangle {
+    #[inline]
+    pub const fn new(x: f32, y: f32, width: f32, height: f32) -> Rectangle {
+        Rectangle {
+            x,
+            y,
+            width,
+            height,
+        }
+    }
+
+    pub fn area(&self) -> f64 {
+        self.width as f64 * self.height as f64
+    }
+}
+
+impl From<&Rectangle> for Rectangle {
+    #[inline]
+    fn from(rectangle: &Rectangle) -> Rectangle {
+        *rectangle
+    }
+}
+
+impl From<ffi::Rectangle> for Rectangle {
+    #[inline]
+    fn from(rectangle: ffi::Rectangle) -> Rectangle {
+        unsafe { mem::transmute(rectangle) }
+    }
+}
+
+impl Into<ffi::Rectangle> for Rectangle {
+    #[inline]
+    fn into(self) -> ffi::Rectangle {
+        unsafe { mem::transmute(self) }
+    }
+}
+
 /// Convenient macro to create a vector.
 macro_rules! vector {
     ($x:expr, $y: expr) => {
@@ -173,6 +220,7 @@ impl From<(f32, f32)> for Vector2 {
 }
 
 impl From<ffi::Vector2> for Vector2 {
+    #[inline]
     fn from(vector: ffi::Vector2) -> Vector2 {
         unsafe { mem::transmute(vector) }
     }
@@ -193,14 +241,9 @@ impl Into<(f32, f32)> for Vector2 {
 }
 
 impl Into<ffi::Vector2> for Vector2 {
+    #[inline]
     fn into(self) -> ffi::Vector2 {
         unsafe { mem::transmute(self) }
-    }
-}
-
-impl Into<ffi::Vector2> for &Vector2 {
-    fn into(self) -> ffi::Vector2 {
-        self.clone().into()
     }
 }
 
@@ -491,6 +534,7 @@ impl From<(f32, f32, f32)> for Vector3 {
 }
 
 impl From<ffi::Vector3> for Vector3 {
+    #[inline]
     fn from(vector: ffi::Vector3) -> Vector3 {
         unsafe { mem::transmute(vector) }
     }
@@ -511,14 +555,9 @@ impl Into<(f32, f32, f32)> for Vector3 {
 }
 
 impl Into<ffi::Vector3> for Vector3 {
+    #[inline]
     fn into(self) -> ffi::Vector3 {
         unsafe { mem::transmute(self) }
-    }
-}
-
-impl Into<ffi::Vector3> for &Vector3 {
-    fn into(self) -> ffi::Vector3 {
-        self.clone().into()
     }
 }
 

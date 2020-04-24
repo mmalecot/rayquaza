@@ -9,7 +9,7 @@ fn main() -> Result {
     while !window.should_close() {
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
-            canvas.draw_text("Some basic shapes available", 20, 20, 20, Color::DARKGRAY);
+            canvas.draw_text("Some basic shapes", 20, 20, 20, Color::DARKGRAY);
             canvas.draw_line(18, 42, window.get_width() - 18, 42, Color::BLACK);
             canvas.draw_circle(window.get_width() / 4, 120, 35.0, Color::DARKBLUE);
             canvas.draw_circle_gradient(
@@ -48,7 +48,7 @@ fn main() -> Result {
                 (window.get_width() as f32 / 4.0 * 3.0 + 20.0, 230.0),
                 Color::DARKBLUE,
             );
-            canvas.draw_polygon_vec(
+            canvas.draw_polygon(
                 (window.get_width() as f32 / 4.0 * 3.0, 320.0),
                 6,
                 80.0,
