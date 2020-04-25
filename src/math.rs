@@ -7,7 +7,7 @@ use std::{
     ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
-/// Rectangle.
+/// Rectangle type.
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Rectangle {
@@ -18,6 +18,7 @@ pub struct Rectangle {
 }
 
 impl Rectangle {
+    /// Creates a `Rectangle`.
     #[inline]
     pub const fn new(x: f32, y: f32, width: f32, height: f32) -> Rectangle {
         Rectangle {
@@ -28,6 +29,7 @@ impl Rectangle {
         }
     }
 
+    /// Returns the area of the rectangle.
     pub fn area(&self) -> f64 {
         self.width as f64 * self.height as f64
     }
@@ -64,7 +66,7 @@ macro_rules! vector {
     };
 }
 
-/// Vector2.
+/// Vector2 type.
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vector2 {
@@ -306,7 +308,7 @@ impl SubAssign<f32> for Vector2 {
     }
 }
 
-/// Vector3.
+/// Vector3 type.
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vector3 {
