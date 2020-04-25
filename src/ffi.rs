@@ -211,6 +211,13 @@ extern "C" {
     pub fn GetClipboardText() -> *const c_char;
     pub fn SetClipboardText(text: *const c_char);
 
+    // Cursor-related functions
+    pub fn ShowCursor();
+    pub fn HideCursor();
+    pub fn IsCursorHidden() -> bool;
+    pub fn EnableCursor();
+    pub fn DisableCursor();
+
     // Drawing-related functions
     pub fn ClearBackground(color: Color);
     pub fn BeginDrawing();
