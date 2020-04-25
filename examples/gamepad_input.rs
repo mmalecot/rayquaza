@@ -1,4 +1,4 @@
-use rayquaza::{Color, Gamepad, Result, WindowBuilder};
+use rayquaza::{color::Color, input::Gamepad, result::Result, window::WindowBuilder};
 
 fn main() -> Result {
     let window = WindowBuilder::new()

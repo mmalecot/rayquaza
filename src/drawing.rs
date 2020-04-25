@@ -1,6 +1,6 @@
 //! Drawing module.
 
-use crate::{color::Color, ffi, Window};
+use crate::{color::Color, ffi, window::Window};
 use std::marker::PhantomData;
 
 /// Canvas.

@@ -634,7 +634,7 @@ pub fn clamp<T: PartialOrd>(value: T, min: T, max: T) -> T {
 
 #[cfg(test)]
 mod tests {
-    use crate::{clamp, Vector2, Vector3};
+    use crate::math::{clamp, Vector2, Vector3};
 
     #[test]
     fn test_vector2_new() {

@@ -1,5 +1,6 @@
 //! Error module.
 
+use crate::{texture::LoadTextureError, window::CreateWindowError};
 use std::fmt::{Display, Formatter, Result};
 
 /// Generic error type.
@@ -28,32 +29,3 @@ impl From<LoadTextureError> for Error {
         Error::LoadTextureError(error)
     }
 }
-
-/// Kinds of window creation errors.
-#[derive(Clone, Debug, Eq, PartialEq)]
-pub enum CreateWindowError {
-    InitializationFailed,
-    AlreadyCreated,
-}
-
-impl Display for CreateWindowError {
-    fn fmt(&self, formatter: &mut Formatter) -> Result {
-        write!(formatter, "{:?}", self)
-    }
-}
-
-impl std::error::Error for CreateWindowError {}
-
-/// Kinds of texture loading errors.
-#[derive(Clone, Debug, Eq, PartialEq)]
-pub enum LoadTextureError {
-    ReadFailed,
-}
-
-impl Display for LoadTextureError {
-    fn fmt(&self, formatter: &mut Formatter) -> Result {
-        write!(formatter, "{:?}", self)
-    }
-}
-
-impl std::error::Error for LoadTextureError {}

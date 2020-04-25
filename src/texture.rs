@@ -5,9 +5,22 @@ use crate::{
     drawing::Canvas,
     ffi,
     window::{Handle, Window},
-    LoadTextureError,
 };
-use std::{ffi::CString, path::Path, rc::Rc};
+use std::{ffi::CString, fmt, path::Path, rc::Rc};
+
+/// Kinds of texture loading errors.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum LoadTextureError {
+    ReadFailed,
+}
+
+impl fmt::Display for LoadTextureError {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        write!(formatter, "{:?}", self)
+    }
+}
+
+impl std::error::Error for LoadTextureError {}
 
 /// 2D texture.
 pub struct Texture {

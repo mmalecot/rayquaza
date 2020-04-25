@@ -1,8 +1,10 @@
 //! Window module.
 
-use crate::{ffi, math::Vector2, CreateWindowError};
+use crate::{ffi, math::Vector2};
 use std::{
+    error::Error,
     ffi::{CStr, CString},
+    fmt,
     rc::Rc,
     sync::atomic::{AtomicBool, Ordering},
 };
@@ -17,6 +19,21 @@ impl Drop for Handle {
         }
     }
 }
+
+/// Kinds of window creation errors.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum CreateWindowError {
+    InitializationFailed,
+    AlreadyCreated,
+}
+
+impl fmt::Display for CreateWindowError {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        write!(formatter, "{:?}", self)
+    }
+}
+
+impl Error for CreateWindowError {}
 
 /// Window.
 pub struct Window {

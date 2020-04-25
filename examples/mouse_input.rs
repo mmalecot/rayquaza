@@ -1,4 +1,6 @@
-use rayquaza::{Color, MouseButton, Result, Vector2, WindowBuilder};
+use rayquaza::{
+    color::Color, input::MouseButton, math::Vector2, result::Result, window::WindowBuilder,
+};
 
 struct Ball {
     position: Vector2,

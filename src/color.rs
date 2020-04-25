@@ -224,7 +224,7 @@ impl ToString for Color {
 
 #[cfg(test)]
 mod tests {
-    use crate::Color;
+    use crate::color::Color;
     use std::str::FromStr;
 
     #[test]

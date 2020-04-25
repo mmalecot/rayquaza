@@ -24,7 +24,7 @@ rayquaza = "1.0.0-dev.1"
 ### Basic window
 
 ```rust
-use rayquaza::{Color, Result, WindowBuilder};
+use rayquaza::{color::Color, result::Result, window::WindowBuilder};
 
 fn main() -> Result {
     let window = WindowBuilder::new().title("Basic window").vsync().build()?;

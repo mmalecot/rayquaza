@@ -10,7 +10,7 @@
 //! # Example
 //!
 //! ```rust,no_run
-//! use rayquaza::{Color, Result, WindowBuilder};
+//! use rayquaza::{color::Color, result::Result, window::WindowBuilder};
 //!
 //! fn main() -> Result {
 //!     let window = WindowBuilder::new().build()?;
@@ -24,26 +24,20 @@
 //! }
 //! ```
 
-// Private modules
-mod ffi;
-
 // Internal modules
-mod collision;
-mod color;
 mod cursor;
-mod drawing;
-mod error;
-mod input;
-mod math;
-mod result;
+mod ffi;
 mod shapes;
 mod text;
-mod texture;
 mod timing;
-mod window;
 
-// Re-exported items
-pub use crate::{
-    collision::*, color::*, cursor::*, drawing::*, error::*, input::*, math::*, result::*,
-    shapes::*, text::*, texture::*, timing::*, window::*,
-};
+// Public modules
+pub mod collision;
+pub mod color;
+pub mod drawing;
+pub mod error;
+pub mod input;
+pub mod math;
+pub mod result;
+pub mod texture;
+pub mod window;

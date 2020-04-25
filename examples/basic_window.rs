@@ -1,4 +1,4 @@
-use rayquaza::{Color, Result, WindowBuilder};
+use rayquaza::{color::Color, result::Result, window::WindowBuilder};
 
 fn main() -> Result {
     let window = WindowBuilder::new().title("Basic window").vsync().build()?;

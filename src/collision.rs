@@ -7,7 +7,7 @@ use crate::{
 
 /// Checks collision between two rectangles.
 #[inline]
-pub fn check_collision_rectangles(
+pub fn check_rectangles(
     rectangle1: impl Into<Rectangle>,
     rectangle2: impl Into<Rectangle>,
 ) -> bool {
@@ -16,7 +16,7 @@ pub fn check_collision_rectangles(
 
 /// Checks collision between two circles.
 #[inline]
-pub fn check_collision_circles(
+pub fn check_circles(
     center1: impl Into<Vector2>,
     radius1: f32,
     center2: impl Into<Vector2>,
@@ -32,9 +32,9 @@ pub fn check_collision_circles(
     }
 }
 
-/// Checks collision between circle and rectangle.
+/// Checks collision between a circle and a rectangle.
 #[inline]
-pub fn check_collision_circle_rectangle(
+pub fn check_circle_rectangle(
     center: impl Into<Vector2>,
     radius: f32,
     rectangle: impl Into<Rectangle>,
@@ -51,18 +51,15 @@ pub fn get_collision_rectangle(
     unsafe { ffi::GetCollisionRec(rectangle1.into().into(), rectangle2.into().into()).into() }
 }
 
-/// Checks if point is inside rectangle.
+/// Checks if a point is inside a rectangle.
 #[inline]
-pub fn check_collision_point_rectangle(
-    point: impl Into<Vector2>,
-    rectangle: impl Into<Rectangle>,
-) -> bool {
+pub fn check_point_rectangle(point: impl Into<Vector2>, rectangle: impl Into<Rectangle>) -> bool {
     unsafe { ffi::CheckCollisionPointRec(point.into().into(), rectangle.into().into()) }
 }
 
-/// Check if point is inside circle.
+/// Checks if a point is inside a circle.
 #[inline]
-pub fn check_collision_point_circle(
+pub fn check_point_circle(
     point: impl Into<Vector2>,
     center: impl Into<Vector2>,
     radius: f32,
@@ -70,9 +67,9 @@ pub fn check_collision_point_circle(
     unsafe { ffi::CheckCollisionPointCircle(point.into().into(), center.into().into(), radius) }
 }
 
-/// Checks if point is inside a triangle.
+/// Checks if a point is inside a triangle.
 #[inline]
-pub fn check_collision_point_triangle(
+pub fn check_point_triangle(
     point: impl Into<Vector2>,
     point1: impl Into<Vector2>,
     point2: impl Into<Vector2>,

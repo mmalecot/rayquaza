@@ -1,4 +1,10 @@
-use rayquaza::{clamp, Color, Key, Result, Vector2, WindowBuilder};
+use rayquaza::{
+    color::Color,
+    input::Key,
+    math::{clamp, Vector2},
+    result::Result,
+    window::WindowBuilder,
+};
 
 struct Ball {
     position: Vector2,

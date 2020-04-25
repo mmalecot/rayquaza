@@ -1,6 +1,6 @@
 //! Input module.
 
-use crate::{ffi, Vector2, Window};
+use crate::{ffi, math::Vector2, window::Window};
 use std::{
     ffi::{CStr, CString},
     mem,

@@ -1,6 +1,6 @@
 //! Timing module.
 
-use crate::{ffi, Window};
+use crate::{ffi, window::Window};
 
 /// Timing.
 impl Window {
