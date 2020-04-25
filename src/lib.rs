@@ -28,6 +28,7 @@
 mod ffi;
 
 // Internal modules
+mod collision;
 mod color;
 mod cursor;
 mod drawing;
@@ -43,6 +44,6 @@ mod window;
 
 // Re-exported items
 pub use crate::{
-    color::*, cursor::*, drawing::*, error::*, input::*, math::*, result::*, shapes::*, text::*,
-    texture::*, timing::*, window::*,
+    collision::*, color::*, cursor::*, drawing::*, error::*, input::*, math::*, result::*,
+    shapes::*, text::*, texture::*, timing::*, window::*,
 };

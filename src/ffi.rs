@@ -392,6 +392,24 @@ extern "C" {
         rotation: c_float,
         color: Color,
     );
+    // Basic shapes collision detection functions
+    pub fn CheckCollisionRecs(rec1: Rectangle, rec2: Rectangle) -> bool;
+    pub fn CheckCollisionCircles(
+        center1: Vector2,
+        radius1: c_float,
+        center2: Vector2,
+        radius2: c_float,
+    ) -> bool;
+    pub fn CheckCollisionCircleRec(center: Vector2, radius: c_float, rec: Rectangle) -> bool;
+    pub fn GetCollisionRec(rec1: Rectangle, rec2: Rectangle) -> Rectangle;
+    pub fn CheckCollisionPointRec(point: Vector2, rec: Rectangle) -> bool;
+    pub fn CheckCollisionPointCircle(point: Vector2, center: Vector2, radius: c_float) -> bool;
+    pub fn CheckCollisionPointTriangle(
+        point: Vector2,
+        p1: Vector2,
+        p2: Vector2,
+        p3: Vector2,
+    ) -> bool;
 
     // Textures
     // Texture loading function
