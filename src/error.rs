@@ -1,4 +1,4 @@
-//! Error module.
+//! The generic `Error` type.
 
 use crate::{texture::LoadTextureError, window::CreateWindowError};
 use std::fmt::{Display, Formatter, Result};

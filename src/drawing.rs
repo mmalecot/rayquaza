@@ -1,4 +1,4 @@
-//! Drawing module.
+//! Utilities for drawing.
 
 use crate::{color::Color, ffi, window::Window};
 use std::marker::PhantomData;

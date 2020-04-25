@@ -1,4 +1,4 @@
-//! Color module.
+//! The 32-bit RGBA `Color` type.
 
 use crate::{ffi, math};
 use std::{mem, num::ParseIntError, str::FromStr};

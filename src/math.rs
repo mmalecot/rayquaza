@@ -1,4 +1,4 @@
-//! Mathematics module.
+//! Mathematical components.
 
 use crate::ffi;
 use std::{

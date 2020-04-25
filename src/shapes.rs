@@ -1,4 +1,4 @@
-//! Shapes module.
+//! Shapes utilities.
 
 use crate::{
     color::Color,

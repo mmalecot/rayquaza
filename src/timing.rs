@@ -1,4 +1,4 @@
-//! Timing module.
+//! Timing utilities.
 
 use crate::{ffi, window::Window};
 

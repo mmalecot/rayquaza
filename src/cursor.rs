@@ -1,4 +1,4 @@
-//! Cursor module.
+//! Cursor management.
 
 use crate::{ffi, window::Window};
 

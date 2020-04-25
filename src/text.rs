@@ -1,4 +1,4 @@
-//! Text module.
+//! Text utilities.
 
 use crate::{color::Color, drawing::Canvas, ffi};
 use std::ffi::CString;

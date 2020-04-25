@@ -1,4 +1,4 @@
-//! Input module.
+//! Input management.
 
 use crate::{ffi, math::Vector2, window::Window};
 use std::{

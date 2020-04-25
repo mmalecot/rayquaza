@@ -1,4 +1,4 @@
-//! raylib raw FFI bindings.
+//! Utilities related to FFI bindings..
 
 use std::os::raw::{c_char, c_double, c_float, c_int, c_uchar, c_uint};
 

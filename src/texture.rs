@@ -1,4 +1,4 @@
-//! Texture module.
+//! Texture management.
 
 use crate::{
     color::Color,

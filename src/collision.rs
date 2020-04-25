@@ -1,4 +1,4 @@
-//! Collision module.
+//! Collision detection.
 
 use crate::{
     ffi,

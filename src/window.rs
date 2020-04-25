@@ -1,4 +1,4 @@
-//! Window module.
+//! The `Window` type.
 
 use crate::{ffi, math::Vector2};
 use std::{
