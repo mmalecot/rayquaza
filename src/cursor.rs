@@ -5,6 +5,7 @@ use crate::{ffi, window::Window};
 /// Cursor.
 impl Window {
     /// Shows cursor.
+    #[inline]
     pub fn show_cursor(&mut self) {
         unsafe {
             ffi::ShowCursor();
@@ -12,6 +13,7 @@ impl Window {
     }
 
     /// Hides cursor.
+    #[inline]
     pub fn hide_cursor(&mut self) {
         unsafe {
             ffi::HideCursor();
@@ -19,11 +21,13 @@ impl Window {
     }
 
     /// Checks if cursor is not visible.
+    #[inline]
     pub fn is_cursor_hidden(&mut self) -> bool {
         unsafe { ffi::IsCursorHidden() }
     }
 
     /// Enables cursor.
+    #[inline]
     pub fn enable_cursor(&mut self) {
         unsafe {
             ffi::EnableCursor();
@@ -31,6 +35,7 @@ impl Window {
     }
 
     /// Disables cursor.
+    #[inline]
     pub fn disable_cursor(&mut self) {
         unsafe {
             ffi::DisableCursor();
