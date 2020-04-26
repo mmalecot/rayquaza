@@ -608,8 +608,6 @@ static void RestoreTerminal(void)
 // NOTE: data parameter could be used to pass any kind of required data to the initialization
 void InitWindow(int width, int height, const char *title)
 {
-    TRACELOG(LOG_INFO, "Initializing raylib %s", RAYLIB_VERSION);
-
     CORE.Window.title = title;
 
     // Initialize required global values different than 0
