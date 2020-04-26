@@ -8,7 +8,7 @@ use rayquaza::{
 
 struct Ball {
     position: Vector2,
-    speed: Vector2,
+    velocity: Vector2,
     radius: f32,
 }
 
@@ -24,7 +24,7 @@ fn main() -> Result {
             window.get_width() as f32 / 2.0,
             window.get_height() as f32 / 2.0,
         ),
-        speed: Vector2::new(320.0, 256.0),
+        velocity: Vector2::new(320.0, 256.0),
         radius: 20.0,
     };
     while !window.should_close() {
@@ -34,24 +34,24 @@ fn main() -> Result {
         }
         if !pause {
             ball.position.x = clamp(
-                ball.position.x + ball.speed.x * window.get_frame_time(),
+                ball.position.x + ball.velocity.x * window.get_frame_time(),
                 ball.radius,
                 window.get_width() as f32 - ball.radius,
             );
             ball.position.y = clamp(
-                ball.position.y + ball.speed.y * window.get_frame_time(),
+                ball.position.y + ball.velocity.y * window.get_frame_time(),
                 ball.radius,
                 window.get_height() as f32 - ball.radius,
             );
             if ball.position.x >= window.get_width() as f32 - ball.radius
                 || ball.position.x <= ball.radius
             {
-                ball.speed.x *= -1.0;
+                ball.velocity.x *= -1.0;
             }
             if ball.position.y >= window.get_height() as f32 - ball.radius
                 || ball.position.y <= ball.radius
             {
-                ball.speed.y *= -1.0;
+                ball.velocity.y *= -1.0;
             }
         }
         // Draws
