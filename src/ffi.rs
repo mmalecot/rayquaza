@@ -423,4 +423,7 @@ extern "C" {
     // Text drawing functions
     pub fn DrawFPS(x: c_int, y: c_int);
     pub fn DrawText(text: *const c_char, posX: c_int, posY: c_int, fontSize: c_int, color: Color);
+
+    // Text misc. functions
+    pub fn MeasureText(text: *const c_char, fontSize: c_int) -> c_int;
 }

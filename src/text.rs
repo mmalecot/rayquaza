@@ -21,3 +21,11 @@ impl Canvas {
         }
     }
 }
+
+/// Measures text width for default font.
+pub fn measure_text(text: &str, size: i32) -> i32 {
+    unsafe {
+        let text = CString::new(text).unwrap();
+        ffi::MeasureText(text.as_ptr(), size)
+    }
+}

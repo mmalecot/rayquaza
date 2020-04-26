@@ -28,7 +28,6 @@
 mod cursor;
 mod ffi;
 mod shapes;
-mod text;
 mod timing;
 
 // Public modules
@@ -39,5 +38,6 @@ pub mod error;
 pub mod input;
 pub mod math;
 pub mod result;
+pub mod text;
 pub mod texture;
 pub mod window;
