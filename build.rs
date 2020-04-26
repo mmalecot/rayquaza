@@ -38,7 +38,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         .define("SUPPORT_FILEFORMAT_MOD", "OFF")
         .define("SUPPORT_FILEFORMAT_FLAC", "OFF")
         .define("SUPPORT_FILEFORMAT_MP3", "OFF")
-        .define("SUPPORT_TRACELOG", "OFF")
         .define("STATIC", "TRUE")
         .build();
     fs::remove_dir_all(&raylib_destination_directory)?;
