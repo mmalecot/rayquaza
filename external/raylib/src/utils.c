@@ -155,6 +155,7 @@ void TraceLog(int logType, const char *text, ...)
     strcat(buffer, text);
     strcat(buffer, "\n");
     vprintf(buffer, args);
+    fflush(stdout);
 #endif
 
     va_end(args);
