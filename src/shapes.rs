@@ -337,7 +337,7 @@ impl Canvas {
         }
     }
 
-    // Draws a color-filled rectangle.
+    /// Draws a color-filled rectangle.
     #[inline]
     pub fn draw_rectangle_rec(&mut self, rectangle: impl Into<Rectangle>, color: impl Into<Color>) {
         unsafe {
