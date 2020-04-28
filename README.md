@@ -24,18 +24,25 @@ rayquaza = "1.0.0-dev.1"
 ### Basic window
 
 ```rust
-use rayquaza::{color::Color, result::Result, window::WindowBuilder};
+use rayquaza::{color::Color, result::Result, text::measure_text, window::WindowBuilder};
+
+const TEXT: &str = "Congrats! You created your first window!";
+const TEXT_SIZE: i32 = 20;
 
 fn main() -> Result {
-    let window = WindowBuilder::new().title("Basic window").vsync().build()?;
+    let window = WindowBuilder::new()
+        .title("Basic window")
+        .resizable()
+        .vsync()
+        .build()?;
     while !window.should_close() {
         window.draw(|canvas| {
             canvas.clear_background(Color::BLACK);
             canvas.draw_text(
-                "Congrats! You created your first window!",
-                190,
-                200,
-                20,
+                TEXT,
+                window.get_width() / 2 - measure_text(TEXT, TEXT_SIZE) / 2,
+                window.get_height() / 2 - 10,
+                TEXT_SIZE,
                 Color::WHITE,
             );
         });
