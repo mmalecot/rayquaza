@@ -119,6 +119,14 @@ pub const MOUSE_LEFT_BUTTON: i32 = 0;
 pub const MOUSE_RIGHT_BUTTON: i32 = 1;
 pub const MOUSE_MIDDLE_BUTTON: i32 = 2;
 
+// Gamepad axis
+pub const GAMEPAD_AXIS_LEFT_X: i32 = 0;
+pub const GAMEPAD_AXIS_LEFT_Y: i32 = 1;
+pub const GAMEPAD_AXIS_RIGHT_X: i32 = 2;
+pub const GAMEPAD_AXIS_RIGHT_Y: i32 = 3;
+pub const GAMEPAD_AXIS_LEFT_TRIGGER: i32 = 4;
+pub const GAMEPAD_AXIS_RIGHT_TRIGGER: i32 = 5;
+
 // Gamepad number
 pub const GAMEPAD_PLAYER1: i32 = 0;
 pub const GAMEPAD_PLAYER2: i32 = 1;

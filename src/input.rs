@@ -26,20 +26,20 @@ pub enum Gamepad {
 }
 
 /// Kinds of gamepad axis.
-#[repr(C)]
+#[repr(i32)]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum GamepadAxis {
     // Left stick
-    LeftX = 1,
-    LeftY,
+    LeftX = ffi::GAMEPAD_AXIS_LEFT_X,
+    LeftY = ffi::GAMEPAD_AXIS_LEFT_Y,
 
     // Right stick
-    RightX,
-    RightY,
+    RightX = ffi::GAMEPAD_AXIS_RIGHT_X,
+    RightY = ffi::GAMEPAD_AXIS_RIGHT_Y,
 
     // Pressure levels for the back triggers
-    LeftTrigger,
-    RightTrigger,
+    LeftTrigger = ffi::GAMEPAD_AXIS_LEFT_TRIGGER,
+    RightTrigger = ffi::GAMEPAD_AXIS_RIGHT_TRIGGER,
 }
 
 /// Kinds of gamepad buttons.
