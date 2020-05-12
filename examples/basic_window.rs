@@ -15,7 +15,7 @@ fn main() -> Result {
             canvas.draw_text(
                 TEXT,
                 window.get_width() / 2 - measure_text(TEXT, TEXT_SIZE) / 2,
-                window.get_height() / 2 - 10,
+                window.get_height() / 2 - TEXT_SIZE / 2,
                 TEXT_SIZE,
                 Color::WHITE,
             );
