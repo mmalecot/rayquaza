@@ -10,6 +10,12 @@
 
 Idiomatic wrapper for [raylib](https://www.raylib.com/).
 
+## Features
+- No native dependencies: `raylib` is embedded within the program.
+- No Cargo dependencies: build dependencies only.
+- Multi-platform: `Windows`, `Linux` and `macOS` (tested via CI for the 3 platforms).
+- Idiomatic: `Rust` concepts overuse, safe API, follows `Rust` API & style guidelines.
+
 ## Usage
 
 Add this to your `Cargo.toml`:
