@@ -1,6 +1,6 @@
 use rayquaza::{
     collision::check_point_rectangle, color::Color, input::Key, math::Rectangle, result::Result,
-    text::measure_text, window::WindowBuilder,
+    window::WindowBuilder,
 };
 
 #[derive(PartialEq)]
@@ -184,7 +184,7 @@ fn main() -> Result {
                     canvas.draw_text(
                         &item.title,
                         item.rectangle.x as i32 + (item.rectangle.width / 2.0) as i32
-                            - measure_text(&item.title, 10) / 2,
+                            - window.measure_text(&item.title, 10) / 2,
                         item.rectangle.y as i32 + item.rectangle.height as i32 - 20,
                         10,
                         Color::WHITE,

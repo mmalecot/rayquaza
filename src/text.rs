@@ -1,6 +1,6 @@
 //! Text utilities.
 
-use crate::{color::Color, drawing::Canvas, ffi};
+use crate::{color::Color, drawing::Canvas, ffi, window::Window};
 use std::ffi::CString;
 
 /// Text.
@@ -22,10 +22,13 @@ impl Canvas {
     }
 }
 
-/// Measures text width for default font.
-pub fn measure_text(text: &str, size: i32) -> i32 {
-    unsafe {
-        let text = CString::new(text).unwrap();
-        ffi::MeasureText(text.as_ptr(), size)
+/// Text.
+impl Window {
+    /// Measures text width for default font.
+    pub fn measure_text(&self, text: &str, size: i32) -> i32 {
+        unsafe {
+            let text = CString::new(text).unwrap();
+            ffi::MeasureText(text.as_ptr(), size)
+        }
     }
 }
