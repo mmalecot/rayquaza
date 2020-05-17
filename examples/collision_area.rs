@@ -66,18 +66,11 @@ fn main() -> Result {
             );
             if let Some(rectangle) = collision {
                 canvas.draw_text(
-                    "COLLISION!",
-                    window.get_width() / 2 - window.measure_text("COLLISION!", 20) / 2,
-                    10,
-                    20,
-                    Color::BLACK,
-                );
-                canvas.draw_text(
                     &format!("Collision area: {}", rectangle.area() as i64),
                     window.get_width() / 2 - 100,
-                    50,
+                    10,
                     20,
-                    Color::BLACK,
+                    Color::WHITE,
                 );
             }
         });
