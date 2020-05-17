@@ -1,6 +1,6 @@
 //! Utilities for drawing.
 
-use crate::{color::Color, ffi, window::Window};
+use crate::{camera::Camera2D, color::Color, ffi, window::Window};
 use std::marker::PhantomData;
 
 /// Canvas.
@@ -19,6 +19,18 @@ impl Canvas {
     #[inline]
     pub fn clear_background(&mut self, color: impl Into<Color>) {
         unsafe { ffi::ClearBackground(color.into().into()) }
+    }
+
+    /// Draws in 2D mode with custom camera.
+    pub fn mode_2d<F>(&mut self, camera: Camera2D, function: F)
+    where
+        F: FnOnce(&mut Canvas),
+    {
+        unsafe {
+            ffi::BeginMode2D(camera.into());
+            function(self);
+            ffi::EndMode2D();
+        }
     }
 }
 

@@ -31,12 +31,14 @@ mod shapes;
 mod timing;
 
 // Public modules
+pub mod camera;
 pub mod collision;
 pub mod color;
 pub mod drawing;
 pub mod error;
 pub mod input;
 pub mod math;
+pub mod misc;
 pub mod result;
 pub mod text;
 pub mod texture;

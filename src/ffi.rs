@@ -145,6 +145,15 @@ pub const FLAG_VSYNC_HINT: u32 = 64;
 
 // Structures
 #[repr(C)]
+#[derive(Clone, Copy)]
+pub struct Camera2D {
+    pub offset: Vector2,
+    pub target: Vector2,
+    pub rotation: c_float,
+    pub zoom: c_float,
+}
+
+#[repr(C)]
 #[derive(Copy, Clone)]
 pub struct Color {
     pub r: c_uchar,
@@ -230,6 +239,8 @@ extern "C" {
     pub fn ClearBackground(color: Color);
     pub fn BeginDrawing();
     pub fn EndDrawing();
+    pub fn BeginMode2D(camera: Camera2D);
+    pub fn EndMode2D();
 
     // Timing-related functions
     pub fn SetTargetFPS(fps: c_int);
@@ -239,6 +250,7 @@ extern "C" {
 
     // Misc. functions
     pub fn SetConfigFlags(flags: c_uint);
+    pub fn GetRandomValue(min: c_int, max: c_int) -> c_int;
 
     // Input-related functions: keyboard
     pub fn IsKeyPressed(key: c_int) -> bool;
