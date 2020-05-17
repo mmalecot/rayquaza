@@ -68,7 +68,6 @@ fn main() -> Result {
             if pause {
                 canvas.draw_text("PAUSED", 339, 200, 30, Color::GRAY);
             }
-            canvas.draw_fps(10, 10);
         });
     }
     Ok(())
