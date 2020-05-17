@@ -97,7 +97,7 @@ fn main() -> Result {
         window.draw(|canvas| {
             canvas.clear_background(Color::SKYBLUE);
             canvas.mode_2d(camera, |canvas| {
-                canvas.draw_rectangle(0, 320, WORLD_WIDTH, 5000, Color::DARKGRAY);
+                canvas.draw_rectangle(0, 320, WORLD_WIDTH, 20000, Color::DARKGRAY);
                 buildings.iter().for_each(|building| {
                     canvas.draw_rectangle_rec(building.rectangle, building.color)
                 });
