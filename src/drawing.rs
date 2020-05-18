@@ -1,20 +1,12 @@
-//! Utilities for drawing.
+//! Drawing utilities.
 
 use crate::{camera::Camera2D, color::Color, ffi, window::Window};
 use std::marker::PhantomData;
 
-/// Canvas.
+/// Container that holds various drawing elements.
 pub struct Canvas(PhantomData<*const ()>);
 
 impl Canvas {
-    /// Creates an new canvas to start drawing.
-    fn new() -> Canvas {
-        unsafe {
-            ffi::BeginDrawing();
-            Canvas(PhantomData)
-        }
-    }
-
     /// Sets background color.
     #[inline]
     pub fn clear_background(&mut self, color: impl Into<Color>) {
@@ -34,14 +26,6 @@ impl Canvas {
     }
 }
 
-impl Drop for Canvas {
-    fn drop(&mut self) {
-        unsafe {
-            ffi::EndDrawing();
-        }
-    }
-}
-
 /// Drawing.
 impl Window {
     /// Draws in a canvas and swap buffers (double buffering).
@@ -49,6 +33,10 @@ impl Window {
     where
         F: FnOnce(&mut Canvas),
     {
-        function(&mut Canvas::new())
+        unsafe {
+            ffi::BeginDrawing();
+            function(&mut Canvas(PhantomData));
+            ffi::EndDrawing();
+        }
     }
 }
