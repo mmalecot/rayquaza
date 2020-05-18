@@ -21,7 +21,6 @@ fn main() -> Result {
     );
     let mut motion = 240.0;
     while !window.should_close() {
-        // Updates
         rectangle1.x = clamp(
             rectangle1.x + motion * window.get_frame_time(),
             0.0,
@@ -45,7 +44,6 @@ fn main() -> Result {
         } else {
             None
         };
-        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_rectangle_rec(rectangle1, Color::GOLD);
