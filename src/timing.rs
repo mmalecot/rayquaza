@@ -7,7 +7,9 @@ impl Window {
     /// Sets target FPS (maximum).
     #[inline]
     pub fn set_target_fps(&mut self, fps: i32) {
-        unsafe { ffi::SetTargetFPS(fps) }
+        unsafe {
+            ffi::SetTargetFPS(fps);
+        }
     }
 
     /// Returns current FPS.
