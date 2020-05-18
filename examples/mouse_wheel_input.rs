@@ -1,25 +1,28 @@
-use rayquaza::{color::Color, result::Result, window::WindowBuilder};
+use rayquaza::{color::Color, math::Vector2, result::Result, window::WindowBuilder};
 
-const BOX_SPEED: f32 = 480.0;
 const BOX_SIZE: i32 = 80;
+const BOX_SPEED: f32 = 480.0;
 
 fn main() -> Result {
     let window = WindowBuilder::new()
         .title("Mouse wheel input")
         .vsync()
         .build()?;
-    let mut position = (
-        window.get_width() / 2 - BOX_SIZE / 2,
-        window.get_height() / 2 - BOX_SIZE / 2,
+    let mut position = Vector2::new(
+        window.get_width() as f32 / 2.0 - BOX_SIZE as f32 / 2.0,
+        window.get_height() as f32 / 2.0 - BOX_SIZE as f32 / 2.0,
     );
     while !window.should_close() {
-        // Updates
-        let delta = window.get_frame_time();
-        position.1 -= (window.get_mouse_wheel_move() as f32 * BOX_SPEED * delta) as i32;
-        // Draws
+        position.y -= window.get_mouse_wheel_move() as f32 * BOX_SPEED * window.get_frame_time();
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
-            canvas.draw_rectangle(position.0, position.1, BOX_SIZE, BOX_SIZE, Color::MAROON);
+            canvas.draw_rectangle(
+                position.x as i32,
+                position.y as i32,
+                BOX_SIZE,
+                BOX_SIZE,
+                Color::MAROON,
+            );
             canvas.draw_text(
                 "Use mouse wheel to move the cube up and down!",
                 10,
@@ -28,7 +31,7 @@ fn main() -> Result {
                 Color::GRAY,
             );
             canvas.draw_text(
-                &format!("Box position Y: {:03}", position.1),
+                &format!("Box position Y: {}", position.y as i32),
                 10,
                 40,
                 20,
