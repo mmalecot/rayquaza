@@ -140,7 +140,7 @@ impl Canvas {
         }
     }
 
-    /// Draws circle sector outline.
+    /// Draws a circle sector outline.
     #[inline]
     pub fn draw_circle_sector_lines(
         &mut self,
@@ -197,7 +197,7 @@ impl Canvas {
         }
     }
 
-    /// Draws circle outline.
+    /// Draws a circle outline.
     #[inline]
     pub fn draw_circle_lines(
         &mut self,
@@ -211,7 +211,7 @@ impl Canvas {
         }
     }
 
-    /// Draws ellipse.
+    /// Draws an ellipse.
     #[inline]
     pub fn draw_ellipse(
         &mut self,
@@ -232,7 +232,7 @@ impl Canvas {
         }
     }
 
-    /// Draws ellipse outline.
+    /// Draws an ellipse outline.
     #[inline]
     pub fn draw_ellipse_lines(
         &mut self,
@@ -253,7 +253,7 @@ impl Canvas {
         }
     }
 
-    /// Draws ring.
+    /// Draws a ring.
     #[inline]
     #[allow(clippy::too_many_arguments)]
     pub fn draw_ring(
@@ -279,7 +279,7 @@ impl Canvas {
         };
     }
 
-    /// Draws ring out.
+    /// Draws a ring out.
     #[inline]
     #[allow(clippy::too_many_arguments)]
     pub fn draw_ring_lines(
