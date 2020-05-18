@@ -42,7 +42,9 @@ impl Texture {
 
 impl Drop for Texture {
     fn drop(&mut self) {
-        unsafe { ffi::UnloadTexture(self.raw) }
+        unsafe {
+            ffi::UnloadTexture(self.raw);
+        }
     }
 }
 
@@ -51,7 +53,9 @@ impl Canvas {
     /// Draws a texture.
     #[inline]
     pub fn draw_texture(&mut self, texture: &Texture, x: i32, y: i32, color: impl Into<Color>) {
-        unsafe { ffi::DrawTexture(texture.raw, x, y, color.into().into()) }
+        unsafe {
+            ffi::DrawTexture(texture.raw, x, y, color.into().into());
+        }
     }
 }
 
