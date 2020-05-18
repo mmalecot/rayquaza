@@ -13,21 +13,18 @@ fn main() -> Result {
         window.get_height() as f32 / 2.0,
     );
     while !window.should_close() {
-        // Updates
-        let delta = window.get_frame_time();
         if window.is_key_down(Key::Right) {
-            position.x += BALL_SPEED * delta;
+            position.x += BALL_SPEED * window.get_frame_time();
         }
         if window.is_key_down(Key::Left) {
-            position.x -= BALL_SPEED * delta;
+            position.x -= BALL_SPEED * window.get_frame_time();
         }
         if window.is_key_down(Key::Up) {
-            position.y -= BALL_SPEED * delta;
+            position.y -= BALL_SPEED * window.get_frame_time();
         }
         if window.is_key_down(Key::Down) {
-            position.y += BALL_SPEED * delta;
+            position.y += BALL_SPEED * window.get_frame_time();
         }
-        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_circle_vec(position, 50.0, Color::MAROON);
