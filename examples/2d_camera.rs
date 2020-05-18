@@ -104,6 +104,11 @@ fn main() -> Result {
                 canvas.draw_rectangle_rec(player, Color::RED);
             });
             canvas.draw_rectangle(10, 10, 250, 115, Color::DARKBLUE.fade(0.5));
+            canvas.draw_rectangle_lines_ex(
+                Rectangle::new(10.0, 10.0, 250.0, 115.0),
+                2,
+                Color::DARKBLUE,
+            );
             canvas.draw_text("Controls:", 20, 20, 10, Color::WHITE);
             canvas.draw_text("- Right / Left keys to move", 40, 40, 10, Color::WHITE);
             canvas.draw_text("- Mouse wheel to zoom in-out", 40, 60, 10, Color::WHITE);
