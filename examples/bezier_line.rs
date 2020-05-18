@@ -15,18 +15,16 @@ fn main() -> Result {
         window.get_height() as f32 - 100.0,
     );
     while !window.should_close() {
-        // Updates
         if window.is_mouse_button_down(MouseButton::Left) {
             start = window.get_mouse_position();
         }
         if window.is_mouse_button_down(MouseButton::Right) {
             end = window.get_mouse_position();
         }
-        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_text(
-                "Use mouse click to define line start and end points",
+                "Use mouse buttons to define line start and end points",
                 20,
                 20,
                 20,
