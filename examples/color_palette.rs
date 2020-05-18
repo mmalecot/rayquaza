@@ -16,141 +16,33 @@ struct Item {
     rectangle: Rectangle,
 }
 
+macro_rules! item {
+    ($color:ident) => {
+        Item {
+            color: Color::$color,
+            title: String::from(stringify!($color)),
+            state: State::Normal,
+            rectangle: Rectangle::default(),
+        }
+    };
+}
+
+macro_rules! items {
+    ($($color:ident),*) => {
+        vec![$(item!($color)),*]
+    };
+}
+
 fn main() -> Result {
     let window = WindowBuilder::new()
         .title("Color palette")
         .vsync()
         .build()?;
-    let mut items = vec![
-        Item {
-            color: Color::DARKGRAY,
-            title: String::from("DARKGRAY"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::MAROON,
-            title: String::from("MAROON"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::ORANGE,
-            title: String::from("ORANGE"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::DARKGREEN,
-            title: String::from("DARKGREEN"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::DARKBLUE,
-            title: String::from("DARKBLUE"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::DARKPURPLE,
-            title: String::from("DARKPURPLE"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::DARKBROWN,
-            title: String::from("DARKBROWN"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::GRAY,
-            title: String::from("GRAY"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::RED,
-            title: String::from("RED"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::GOLD,
-            title: String::from("GOLD"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::LIME,
-            title: String::from("LIME"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::BLUE,
-            title: String::from("BLUE"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::VIOLET,
-            title: String::from("VIOLET"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::BROWN,
-            title: String::from("BROWN"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::LIGHTGRAY,
-            title: String::from("LIGHTGRAY"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::PINK,
-            title: String::from("PINK"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::YELLOW,
-            title: String::from("YELLOW"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::GREEN,
-            title: String::from("GREEN"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::SKYBLUE,
-            title: String::from("SKYBLUE"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::PURPLE,
-            title: String::from("PURPLE"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
-        Item {
-            color: Color::BEIGE,
-            title: String::from("BEIGE"),
-            state: State::Normal,
-            rectangle: Rectangle::default(),
-        },
+    let mut items = items![
+        DARKGRAY, MAROON, ORANGE, DARKGREEN, DARKBLUE, DARKPURPLE, DARKBROWN, GRAY, RED, GOLD,
+        LIME, BLUE, VIOLET, BROWN, LIGHTGRAY, PINK, YELLOW, GREEN, SKYBLUE, PURPLE, BEIGE
     ];
     while !window.should_close() {
-        // Updates
         items.iter_mut().enumerate().for_each(|(index, item)| {
             item.state = if check_point_rectangle(window.get_mouse_position(), item.rectangle) {
                 State::Hover
@@ -162,7 +54,6 @@ fn main() -> Result {
             item.rectangle.width = 100.0;
             item.rectangle.height = 100.0;
         });
-        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_text("Color palette", 20, 30, 20, Color::DARKGRAY);
@@ -192,8 +83,8 @@ fn main() -> Result {
                 }
             });
             canvas.draw_text(
-                "Press SPACE to see all colors",
-                window.get_width() - 180,
+                "Press space key to see all colors",
+                window.get_width() - 200,
                 window.get_height() - 40,
                 10,
                 Color::GRAY,
