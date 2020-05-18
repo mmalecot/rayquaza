@@ -19,7 +19,6 @@ fn main() -> Result {
         color: Color::DARKBLUE,
     };
     while !window.should_close() {
-        // Updates
         ball.position = window.get_mouse_position();
         ball.color = if window.is_mouse_button_pressed(MouseButton::Left) {
             Color::MAROON
@@ -30,12 +29,11 @@ fn main() -> Result {
         } else {
             ball.color
         };
-        // Draws
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_circle_vec(ball.position, 40.0, ball.color);
             canvas.draw_text(
-                "Move ball with mouse and click mouse button to change color",
+                "Move ball with mouse and click mouse buttons to change color",
                 10,
                 10,
                 20,
