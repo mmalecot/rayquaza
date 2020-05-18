@@ -20,9 +20,9 @@ impl Window {
         }
     }
 
-    /// Checks if cursor is not visible.
+    /// Checks if cursor is hidden.
     #[inline]
-    pub fn is_cursor_hidden(&mut self) -> bool {
+    pub fn is_cursor_hidden(&self) -> bool {
         unsafe { ffi::IsCursorHidden() }
     }
 
