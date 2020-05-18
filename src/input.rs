@@ -8,7 +8,7 @@ use std::{
 
 /// Kinds of mouse buttons.
 #[repr(i32)]
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum MouseButton {
     Left = ffi::MOUSE_LEFT_BUTTON,
     Right = ffi::MOUSE_RIGHT_BUTTON,
@@ -17,7 +17,7 @@ pub enum MouseButton {
 
 /// Gamepad number.
 #[repr(i32)]
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Gamepad {
     One = ffi::GAMEPAD_PLAYER1,
     Two = ffi::GAMEPAD_PLAYER2,
@@ -27,7 +27,7 @@ pub enum Gamepad {
 
 /// Kinds of gamepad axis.
 #[repr(i32)]
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum GamepadAxis {
     // Left stick
     LeftX = ffi::GAMEPAD_AXIS_LEFT_X,
@@ -44,7 +44,7 @@ pub enum GamepadAxis {
 
 /// Kinds of gamepad buttons.
 #[repr(C)]
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum GamepadButton {
     // Left buttons (normally D-Pad)
     LeftFaceUp = 1,
@@ -76,7 +76,7 @@ pub enum GamepadButton {
 
 /// Kinds of keyboard keys.
 #[repr(i32)]
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Key {
     // Alphanumeric keys
     Apostrophe = ffi::KEY_APOSTROPHE,
