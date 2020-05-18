@@ -210,7 +210,7 @@ impl Window {
         unsafe { ffi::IsKeyReleased(key as i32) }
     }
 
-    /// Detects if a key is NOT being pressed
+    /// Detects if a key is not being pressed
     #[inline]
     pub fn is_key_up(&self, key: Key) -> bool {
         unsafe { ffi::IsKeyUp(key as i32) }
@@ -333,7 +333,9 @@ impl Window {
     /// Sets a custom key to exit program (default is ESC).
     #[inline]
     pub fn set_exit_key(&mut self, key: Key) {
-        unsafe { ffi::SetExitKey(key as i32) }
+        unsafe {
+            ffi::SetExitKey(key as i32);
+        }
     }
 
     /// Detect if a mouse button has been pressed once.
@@ -354,49 +356,55 @@ impl Window {
         unsafe { ffi::IsMouseButtonReleased(button as i32) }
     }
 
-    /// Detects if a mouse button is NOT being pressed.
+    /// Detects if a mouse button is not being pressed.
     #[inline]
     pub fn is_mouse_button_up(&self, button: MouseButton) -> bool {
         unsafe { ffi::IsMouseButtonUp(button as i32) }
     }
 
-    /// Returns mouse position X.
+    /// Returns mouse X position.
     #[inline]
     pub fn get_mouse_x(&self) -> i32 {
         unsafe { ffi::GetMouseX() }
     }
 
-    /// Returns mouse position Y.
+    /// Returns mouse Y position.
     #[inline]
     pub fn get_mouse_y(&self) -> i32 {
         unsafe { ffi::GetMouseY() }
     }
 
-    /// Returns mouse position XY.
+    /// Returns mouse position.
     #[inline]
     pub fn get_mouse_position(&self) -> Vector2 {
         unsafe { ffi::GetMousePosition().into() }
     }
 
-    /// Sets mouse position XY.
+    /// Sets mouse position.
     #[inline]
     pub fn set_mouse_position(&mut self, x: i32, y: i32) {
-        unsafe { ffi::SetMousePosition(x, y) }
+        unsafe {
+            ffi::SetMousePosition(x, y);
+        }
     }
 
     /// Sets mouse offset.
     #[inline]
     pub fn set_mouse_offset(&mut self, x: i32, y: i32) {
-        unsafe { ffi::SetMouseOffset(x, y) }
+        unsafe {
+            ffi::SetMouseOffset(x, y);
+        }
     }
 
     /// Sets mouse scaling.
     #[inline]
     pub fn set_mouse_scale(&mut self, x: f32, y: f32) {
-        unsafe { ffi::SetMouseScale(x, y) }
+        unsafe {
+            ffi::SetMouseScale(x, y);
+        }
     }
 
-    /// Returns mouse wheel movement Y.
+    /// Returns mouse wheel vertical movement.
     #[inline]
     pub fn get_mouse_wheel_move(&self) -> i32 {
         unsafe { ffi::GetMouseWheelMove() }
@@ -444,7 +452,7 @@ impl Window {
         unsafe { ffi::IsGamepadButtonReleased(gamepad as i32, button as i32) }
     }
 
-    /// Detects if a gamepad button is NOT being pressed.
+    /// Detects if a gamepad button is not being pressed.
     #[inline]
     pub fn is_gamepad_button_up(&self, gamepad: Gamepad, button: GamepadButton) -> bool {
         unsafe { ffi::IsGamepadButtonUp(gamepad as i32, button as i32) }
