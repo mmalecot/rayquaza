@@ -491,7 +491,16 @@ extern "C" {
         position: Vector2,
         fontSize: c_float,
         spacing: c_float,
-        color: Color,
+        tint: Color,
+    );
+    pub fn DrawTextRec(
+        font: Font,
+        text: *const c_char,
+        rec: Rectangle,
+        fontSize: c_float,
+        spacing: c_float,
+        wordWrap: bool,
+        tint: Color,
     );
 
     // Text misc. functions

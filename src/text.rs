@@ -4,7 +4,7 @@ use crate::{
     color::Color,
     drawing::Canvas,
     ffi,
-    math::Vector2,
+    math::{Rectangle, Vector2},
     window::{Handle, Window},
 };
 use std::{ffi::CString, fmt, path::Path, ptr, rc::Rc};
@@ -73,6 +73,32 @@ impl Canvas {
                 position.into().into(),
                 size,
                 spacing,
+                color.into().into(),
+            );
+        }
+    }
+
+    /// Draws text inside rectangle limits.
+    #[allow(clippy::too_many_arguments)]
+    pub fn draw_text_rec(
+        &mut self,
+        font: &Font,
+        text: &str,
+        rectangle: impl Into<Rectangle>,
+        size: f32,
+        spacing: f32,
+        word_wrap: bool,
+        color: impl Into<Color>,
+    ) {
+        unsafe {
+            let text = CString::new(text).unwrap();
+            ffi::DrawTextRec(
+                font.raw,
+                text.as_ptr(),
+                rectangle.into().into(),
+                size,
+                spacing,
+                word_wrap,
                 color.into().into(),
             );
         }
