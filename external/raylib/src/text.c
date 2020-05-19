@@ -316,12 +316,10 @@ Font LoadFont(const char *fileName)
         UnloadImage(image);
     }
 
-    if (font.texture.id == 0)
+    if (font.texture.id != 0)
     {
-        TRACELOG(LOG_WARNING, "FONT: [%s] Failed to load font texture -> Using default font", fileName);
-        font = GetFontDefault();
+        SetTextureFilter(font.texture, FILTER_POINT);    // By default we set point filter (best performance)
     }
-    else SetTextureFilter(font.texture, FILTER_POINT);    // By default we set point filter (best performance)
 
     return font;
 }
@@ -352,9 +350,6 @@ Font LoadFontEx(const char *fileName, int fontSize, int *fontChars, int charsCou
 
         UnloadImage(atlas);
     }
-    else font = GetFontDefault();
-#else
-    font = GetFontDefault();
 #endif
 
     return font;
