@@ -44,7 +44,7 @@ pub fn check_circle_rectangle(
 
 /// Gets collision rectangle for two rectangles collision.
 #[inline]
-pub fn get_collision_rectangle(
+pub fn collision_rectangle(
     rectangle1: impl Into<Rectangle>,
     rectangle2: impl Into<Rectangle>,
 ) -> Rectangle {

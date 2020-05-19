@@ -8,22 +8,19 @@ fn main() -> Result {
         .vsync()
         .msaa_4x()
         .build()?;
-    let mut position = Vector2::new(
-        window.get_width() as f32 / 2.0,
-        window.get_height() as f32 / 2.0,
-    );
+    let mut position = Vector2::new(window.width() as f32 / 2.0, window.height() as f32 / 2.0);
     while !window.should_close() {
         if window.is_key_down(Key::Right) {
-            position.x += BALL_SPEED * window.get_frame_time();
+            position.x += BALL_SPEED * window.frame_time();
         }
         if window.is_key_down(Key::Left) {
-            position.x -= BALL_SPEED * window.get_frame_time();
+            position.x -= BALL_SPEED * window.frame_time();
         }
         if window.is_key_down(Key::Up) {
-            position.y -= BALL_SPEED * window.get_frame_time();
+            position.y -= BALL_SPEED * window.frame_time();
         }
         if window.is_key_down(Key::Down) {
-            position.y += BALL_SPEED * window.get_frame_time();
+            position.y += BALL_SPEED * window.frame_time();
         }
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);

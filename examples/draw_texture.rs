@@ -12,8 +12,8 @@ fn main() -> Result {
             canvas.clear_background(Color::WHITE);
             canvas.draw_texture(
                 &texture,
-                window.get_width() / 2 - texture.get_width() / 2,
-                window.get_height() / 2 - texture.get_height() / 2,
+                window.width() / 2 - texture.width() / 2,
+                window.height() / 2 - texture.height() / 2,
                 Color::WHITE,
             );
         });

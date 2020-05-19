@@ -9,11 +9,11 @@ fn main() -> Result {
         .vsync()
         .build()?;
     let mut position = Vector2::new(
-        window.get_width() as f32 / 2.0 - BOX_SIZE as f32 / 2.0,
-        window.get_height() as f32 / 2.0 - BOX_SIZE as f32 / 2.0,
+        window.width() as f32 / 2.0 - BOX_SIZE as f32 / 2.0,
+        window.height() as f32 / 2.0 - BOX_SIZE as f32 / 2.0,
     );
     while !window.should_close() {
-        position.y -= window.get_mouse_wheel_move() as f32 * BOX_SPEED * window.get_frame_time();
+        position.y -= window.mouse_wheel_move() as f32 * BOX_SPEED * window.frame_time();
         window.draw(|canvas| {
             canvas.clear_background(Color::RAYWHITE);
             canvas.draw_rectangle(

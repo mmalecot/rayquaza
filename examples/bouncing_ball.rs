@@ -18,31 +18,26 @@ fn main() -> Result {
         .msaa_4x()
         .build()?;
     let mut ball = Ball {
-        position: Vector2::new(
-            window.get_width() as f32 / 2.0,
-            window.get_height() as f32 / 2.0,
-        ),
+        position: Vector2::new(window.width() as f32 / 2.0, window.height() as f32 / 2.0),
         velocity: Vector2::new(320.0, 256.0),
         radius: 20.0,
     };
     while !window.should_close() {
         ball.position.x = clamp(
-            ball.position.x + ball.velocity.x * window.get_frame_time(),
+            ball.position.x + ball.velocity.x * window.frame_time(),
             ball.radius,
-            window.get_width() as f32 - ball.radius,
+            window.width() as f32 - ball.radius,
         );
         ball.position.y = clamp(
-            ball.position.y + ball.velocity.y * window.get_frame_time(),
+            ball.position.y + ball.velocity.y * window.frame_time(),
             ball.radius,
-            window.get_height() as f32 - ball.radius,
+            window.height() as f32 - ball.radius,
         );
-        if ball.position.x >= window.get_width() as f32 - ball.radius
-            || ball.position.x <= ball.radius
+        if ball.position.x >= window.width() as f32 - ball.radius || ball.position.x <= ball.radius
         {
             ball.velocity.x *= -1.0;
         }
-        if ball.position.y >= window.get_height() as f32 - ball.radius
-            || ball.position.y <= ball.radius
+        if ball.position.y >= window.height() as f32 - ball.radius || ball.position.y <= ball.radius
         {
             ball.velocity.y *= -1.0;
         }

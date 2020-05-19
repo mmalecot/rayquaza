@@ -28,7 +28,7 @@ fn main() -> Result {
                 &format!(
                     "GP1: {}",
                     window
-                        .get_gamepad_name(Gamepad::One)
+                        .gamepad_name(Gamepad::One)
                         .unwrap_or_else(|| String::from("None"))
                 ),
                 10,
@@ -43,7 +43,7 @@ fn main() -> Result {
                         &format!(
                             "{:?}: {:.2}",
                             axis.clone(),
-                            window.get_gamepad_axis_movement(Gamepad::One, axis.clone())
+                            window.gamepad_axis_movement(Gamepad::One, axis.clone())
                         ),
                         10,
                         110 + (index as i32 * 20),
@@ -55,8 +55,8 @@ fn main() -> Result {
                     &window,
                     &mut canvas,
                     Gamepad::One,
-                    (window.get_width() as f32 / 2.0) as i32 - 160,
-                    (window.get_height() as f32 / 2.0) as i32 - 105,
+                    (window.width() as f32 / 2.0) as i32 - 160,
+                    (window.height() as f32 / 2.0) as i32 - 105,
                 );
             }
         });
@@ -120,27 +120,27 @@ fn draw_gamepad(window: &Window, canvas: &mut Canvas, gamepad: Gamepad, x: i32, 
     canvas.draw_circle(x + 90, y + 60, 16.0, Color::DARKGRAY);
     if window.is_gamepad_button_down(gamepad, GamepadButton::MiddleLeftThumb) {
         canvas.draw_circle(
-            x + 90 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
-            y + 60 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
+            x + 90 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
+            y + 60 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
             11.0,
             Color::BLACK,
         );
         canvas.draw_circle(
-            x + 90 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
-            y + 60 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
+            x + 90 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
+            y + 60 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
             9.0,
             Color::GRAY,
         );
     } else {
         canvas.draw_circle(
-            x + 90 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
-            y + 60 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
+            x + 90 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
+            y + 60 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
             12.0,
             Color::BLACK,
         );
         canvas.draw_circle(
-            x + 90 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
-            y + 60 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
+            x + 90 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftX) * 8.0) as i32,
+            y + 60 + (window.gamepad_axis_movement(gamepad, GamepadAxis::LeftY) * 8.0) as i32,
             10.0,
             Color::DARKGRAY,
         );
@@ -166,27 +166,27 @@ fn draw_gamepad(window: &Window, canvas: &mut Canvas, gamepad: Gamepad, x: i32, 
     canvas.draw_circle(x + 204, y + 104, 16.0, Color::DARKGRAY);
     if window.is_gamepad_button_down(gamepad, GamepadButton::MiddleRightThumb) {
         canvas.draw_circle(
-            x + 204 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
-            y + 104 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
+            x + 204 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
+            y + 104 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
             11.0,
             Color::BLACK,
         );
         canvas.draw_circle(
-            x + 204 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
-            y + 104 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
+            x + 204 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
+            y + 104 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
             9.0,
             Color::GRAY,
         );
     } else {
         canvas.draw_circle(
-            x + 204 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
-            y + 104 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
+            x + 204 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
+            y + 104 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
             12.0,
             Color::BLACK,
         );
         canvas.draw_circle(
-            x + 204 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
-            y + 104 + (window.get_gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
+            x + 204 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightX) * 8.0) as i32,
+            y + 104 + (window.gamepad_axis_movement(gamepad, GamepadAxis::RightY) * 8.0) as i32,
             10.0,
             Color::DARKGRAY,
         );

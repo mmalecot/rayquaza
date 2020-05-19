@@ -14,19 +14,19 @@ impl Window {
 
     /// Returns current FPS.
     #[inline]
-    pub fn get_fps(&self) -> i32 {
+    pub fn fps(&self) -> i32 {
         unsafe { ffi::GetFPS() }
     }
 
     /// Returns time in seconds for last frame drawn.
     #[inline]
-    pub fn get_frame_time(&self) -> f32 {
+    pub fn frame_time(&self) -> f32 {
         unsafe { ffi::GetFrameTime() }
     }
 
     /// Returns elapsed time in seconds since window creation.
     #[inline]
-    pub fn get_time(&self) -> f64 {
+    pub fn time(&self) -> f64 {
         unsafe { ffi::GetTime() }
     }
 }

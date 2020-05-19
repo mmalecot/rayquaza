@@ -217,7 +217,7 @@ impl Window {
     }
 
     /// Gets latest key pressed.
-    pub fn get_key_pressed(&self) -> Option<Key> {
+    pub fn last_key_pressed(&self) -> Option<Key> {
         unsafe {
             match ffi::GetKeyPressed() {
                 ffi::KEY_APOSTROPHE => Some(Key::Apostrophe),
@@ -364,19 +364,19 @@ impl Window {
 
     /// Returns mouse X position.
     #[inline]
-    pub fn get_mouse_x(&self) -> i32 {
+    pub fn mouse_x(&self) -> i32 {
         unsafe { ffi::GetMouseX() }
     }
 
     /// Returns mouse Y position.
     #[inline]
-    pub fn get_mouse_y(&self) -> i32 {
+    pub fn mouse_y(&self) -> i32 {
         unsafe { ffi::GetMouseY() }
     }
 
     /// Returns mouse position.
     #[inline]
-    pub fn get_mouse_position(&self) -> Vector2 {
+    pub fn mouse_position(&self) -> Vector2 {
         unsafe { ffi::GetMousePosition().into() }
     }
 
@@ -406,7 +406,7 @@ impl Window {
 
     /// Returns mouse wheel vertical movement.
     #[inline]
-    pub fn get_mouse_wheel_move(&self) -> i32 {
+    pub fn mouse_wheel_move(&self) -> i32 {
         unsafe { ffi::GetMouseWheelMove() }
     }
 
@@ -425,7 +425,7 @@ impl Window {
     }
 
     /// Returns gamepad internal name id.
-    pub fn get_gamepad_name(&self, gamepad: Gamepad) -> Option<String> {
+    pub fn gamepad_name(&self, gamepad: Gamepad) -> Option<String> {
         unsafe {
             let name = ffi::GetGamepadName(gamepad as i32);
             if name.is_null() {
@@ -459,7 +459,7 @@ impl Window {
     }
 
     /// Gets the last gamepad button pressed.
-    pub fn get_gamepad_button_pressed(&self) -> Option<GamepadButton> {
+    pub fn gamepad_button_pressed(&self) -> Option<GamepadButton> {
         unsafe {
             let button = ffi::GetGamepadButtonPressed();
             if button > 0 {
@@ -472,13 +472,13 @@ impl Window {
 
     /// Returns gamepad axis count for a gamepad.
     #[inline]
-    pub fn get_gamepad_axis_count(&self, gamepad: Gamepad) -> i32 {
+    pub fn gamepad_axis_count(&self, gamepad: Gamepad) -> i32 {
         unsafe { ffi::GetGamepadAxisCount(gamepad as i32) }
     }
 
     /// Returns axis movement value for a gamepad axis.
     #[inline]
-    pub fn get_gamepad_axis_movement(&self, gamepad: Gamepad, axis: GamepadAxis) -> f32 {
+    pub fn gamepad_axis_movement(&self, gamepad: Gamepad, axis: GamepadAxis) -> f32 {
         unsafe { ffi::GetGamepadAxisMovement(gamepad as i32, axis as i32) }
     }
 }

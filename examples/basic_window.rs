@@ -14,8 +14,8 @@ fn main() -> Result {
             canvas.clear_background(Color::BLACK);
             canvas.draw_text(
                 text,
-                window.get_width() / 2 - width / 2,
-                window.get_height() / 2 - size / 2,
+                window.width() / 2 - width / 2,
+                window.height() / 2 - size / 2,
                 size,
                 Color::WHITE,
             );

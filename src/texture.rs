@@ -30,12 +30,12 @@ pub struct Texture {
 
 impl Texture {
     /// Returns the texture width.
-    pub fn get_width(&self) -> i32 {
+    pub fn width(&self) -> i32 {
         self.raw.width
     }
 
     /// Returns the texture height.
-    pub fn get_height(&self) -> i32 {
+    pub fn height(&self) -> i32 {
         self.raw.height
     }
 }

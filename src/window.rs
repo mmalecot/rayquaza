@@ -137,54 +137,54 @@ impl Window {
 
     /// Gets screen width.
     #[inline]
-    pub fn get_width(&self) -> i32 {
+    pub fn width(&self) -> i32 {
         unsafe { ffi::GetScreenWidth() }
     }
 
     /// Gets screen height.
     #[inline]
-    pub fn get_height(&self) -> i32 {
+    pub fn height(&self) -> i32 {
         unsafe { ffi::GetScreenHeight() }
     }
 
     /// Gets number of connected monitors.
     #[inline]
-    pub fn get_monitor_count(&self) -> i32 {
+    pub fn monitor_count(&self) -> i32 {
         unsafe { ffi::GetMonitorCount() }
     }
 
     /// Gets monitor width.
     #[inline]
-    pub fn get_monitor_width(&self, monitor: i32) -> i32 {
+    pub fn monitor_width(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorWidth(monitor) }
     }
 
     /// Gets monitor height.
     #[inline]
-    pub fn get_monitor_height(&self, monitor: i32) -> i32 {
+    pub fn monitor_height(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorHeight(monitor) }
     }
 
     /// Gets monitor physical width in millimeters.
     #[inline]
-    pub fn get_monitor_physical_width(&self, monitor: i32) -> i32 {
+    pub fn monitor_physical_width(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorPhysicalWidth(monitor) }
     }
 
     /// Gets monitor physical height in millimeters
     #[inline]
-    pub fn get_monitor_physical_height(&self, monitor: i32) -> i32 {
+    pub fn monitor_physical_height(&self, monitor: i32) -> i32 {
         unsafe { ffi::GetMonitorPhysicalHeight(monitor) }
     }
 
     /// Gets window position.
     #[inline]
-    pub fn get_position(&self) -> Vector2 {
+    pub fn position(&self) -> Vector2 {
         unsafe { ffi::GetWindowPosition().into() }
     }
 
     /// Gets the human-readable name of monitor.
-    pub fn get_monitor_name(&self, monitor: i32) -> Option<String> {
+    pub fn monitor_name(&self, monitor: i32) -> Option<String> {
         unsafe {
             let name = ffi::GetMonitorName(monitor);
             if name.is_null() {
@@ -196,7 +196,7 @@ impl Window {
     }
 
     /// Gets clipboard text content.
-    pub fn get_clipboard(&self) -> Option<String> {
+    pub fn clipboard(&self) -> Option<String> {
         unsafe {
             let clipboard = ffi::GetClipboardText();
             if clipboard.is_null() {

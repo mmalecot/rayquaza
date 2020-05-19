@@ -19,7 +19,7 @@ fn main() -> Result {
         color: Color::DARKBLUE,
     };
     while !window.should_close() {
-        ball.position = window.get_mouse_position();
+        ball.position = window.mouse_position();
         ball.color = if window.is_mouse_button_pressed(MouseButton::Left) {
             Color::MAROON
         } else if window.is_mouse_button_pressed(MouseButton::Right) {

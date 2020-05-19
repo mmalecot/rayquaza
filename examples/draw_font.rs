@@ -16,8 +16,8 @@ fn main() -> Result {
                 &font,
                 text,
                 Vector2::new(
-                    window.get_width() as f32 / 2.0 - size.x / 2.0,
-                    window.get_height() as f32 / 2.0 - size.y / 2.0,
+                    window.width() as f32 / 2.0 - size.x / 2.0,
+                    window.height() as f32 / 2.0 - size.y / 2.0,
                 ),
                 100.0,
                 0.0,

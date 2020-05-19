@@ -3,7 +3,7 @@ use rayquaza::{
     color::Color,
     input::{Key, MouseButton},
     math::{clamp, Rectangle, Vector2},
-    misc::get_random_value,
+    misc::random_value,
     result::Result,
     window::WindowBuilder,
 };
@@ -29,7 +29,7 @@ fn main() -> Result {
     let mut player = Rectangle::new(WORLD_WIDTH as f32 / 2.0, 0.0, 40.0, 40.0);
     let mut buildings = Vec::with_capacity(BUILDING_COUNT as usize);
     for index in 0..BUILDING_COUNT {
-        let height = get_random_value(100, 800);
+        let height = random_value(100, 800);
         let rectangle = Rectangle::new(
             index as f32 * BUILDING_WIDTH as f32,
             player.height - height as f32,
@@ -37,18 +37,15 @@ fn main() -> Result {
             height as f32,
         );
         let color = Color::new(
-            get_random_value(127, 220) as u8,
-            get_random_value(127, 220) as u8,
-            get_random_value(127, 220) as u8,
+            random_value(127, 220) as u8,
+            random_value(127, 220) as u8,
+            random_value(127, 220) as u8,
             255,
         );
         buildings.push(Building { rectangle, color });
     }
     let mut camera = Camera2D::new(
-        Vector2::new(
-            window.get_width() as f32 / 2.0,
-            window.get_height() as f32 / 2.0,
-        ),
+        Vector2::new(window.width() as f32 / 2.0, window.height() as f32 / 2.0),
         Vector2::new(
             player.x + player.width / 2.0,
             player.y + player.height / 2.0,
@@ -59,38 +56,35 @@ fn main() -> Result {
     while !window.should_close() {
         if window.is_key_down(Key::Right) {
             player.x = clamp(
-                player.x as f32 + PLAYER_SPEED * window.get_frame_time(),
+                player.x as f32 + PLAYER_SPEED * window.frame_time(),
                 0.0,
                 WORLD_WIDTH as f32 - player.width,
             );
         }
         if window.is_key_down(Key::Left) {
             player.x = clamp(
-                player.x as f32 - PLAYER_SPEED * window.get_frame_time(),
+                player.x as f32 - PLAYER_SPEED * window.frame_time(),
                 0.0,
                 WORLD_WIDTH as f32 - player.height,
             );
         }
         if window.is_mouse_button_down(MouseButton::Left) {
-            camera.rotation += ROTATION_SPEED * window.get_frame_time();
+            camera.rotation += ROTATION_SPEED * window.frame_time();
         }
         if window.is_mouse_button_down(MouseButton::Right) {
-            camera.rotation -= ROTATION_SPEED * window.get_frame_time();
+            camera.rotation -= ROTATION_SPEED * window.frame_time();
         }
         if window.is_key_pressed(Key::R) {
             camera.zoom = 1.0;
             camera.rotation = 0.0;
         }
-        camera.offset = Vector2::new(
-            window.get_width() as f32 / 2.0,
-            window.get_height() as f32 / 2.0,
-        );
+        camera.offset = Vector2::new(window.width() as f32 / 2.0, window.height() as f32 / 2.0);
         camera.target = Vector2::new(
             player.x + player.width / 2.0,
             player.y + player.height / 2.0,
         );
         camera.zoom = clamp(
-            camera.zoom + camera.zoom * window.get_mouse_wheel_move() as f32 * 0.25,
+            camera.zoom + camera.zoom * window.mouse_wheel_move() as f32 * 0.25,
             0.1,
             3.0,
         );

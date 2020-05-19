@@ -44,7 +44,7 @@ fn main() -> Result {
     ];
     while !window.should_close() {
         items.iter_mut().enumerate().for_each(|(index, item)| {
-            item.state = if check_point_rectangle(window.get_mouse_position(), item.rectangle) {
+            item.state = if check_point_rectangle(window.mouse_position(), item.rectangle) {
                 State::Hover
             } else {
                 State::Normal
@@ -84,8 +84,8 @@ fn main() -> Result {
             });
             canvas.draw_text(
                 "Press space key to see all colors",
-                window.get_width() - 200,
-                window.get_height() - 40,
+                window.width() - 200,
+                window.height() - 40,
                 10,
                 Color::GRAY,
             );
