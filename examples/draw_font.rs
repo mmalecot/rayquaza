@@ -6,7 +6,7 @@ fn main() -> Result {
         .resizable()
         .vsync()
         .build()?;
-    let font = window.load_font_ex("resources/pacifico.ttf", 100)?;
+    let font = window.load_font_ex("resources/font/pacifico.ttf", 100)?;
     let text = "Hello world!";
     let size = window.measure_text_ex(&font, text, 100.0, 0.0);
     while !window.should_close() {

@@ -6,7 +6,7 @@ fn main() -> Result {
         .resizable()
         .vsync()
         .build()?;
-    let texture = window.load_texture("logo/256x256.png")?;
+    let texture = window.load_texture("resources/image/logo.png")?;
     while !window.should_close() {
         window.draw(|canvas| {
             canvas.clear_background(Color::WHITE);
