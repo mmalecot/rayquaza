@@ -1,6 +1,8 @@
 //! Utilities related to FFI bindings.
 
-use std::os::raw::{c_char, c_double, c_float, c_int, c_uchar, c_uint};
+#![allow(non_snake_case)]
+
+use std::os::raw::{c_char, c_double, c_float, c_int, c_uchar, c_uint, c_void};
 
 // Constants
 // Alphanumeric keys
@@ -155,11 +157,41 @@ pub struct Camera2D {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct CharInfo {
+    pub value: c_int,
+    pub offsetX: c_int,
+    pub offsetY: c_int,
+    pub advanceX: c_int,
+    pub image: Image,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct Color {
     pub r: c_uchar,
     pub g: c_uchar,
     pub b: c_uchar,
     pub a: c_uchar,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct Font {
+    pub baseSize: c_int,
+    pub charsCount: c_int,
+    pub texture: Texture2D,
+    pub recs: *mut Rectangle,
+    pub chars: *mut CharInfo,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct Image {
+    pub data: *mut c_void,
+    pub width: c_int,
+    pub height: c_int,
+    pub mipmaps: c_int,
+    pub format: c_int,
 }
 
 #[repr(C)]
@@ -440,10 +472,34 @@ extern "C" {
     pub fn DrawTexture(texture: Texture2D, posX: c_int, posY: c_int, tint: Color);
 
     // Text
+    // Font loading/unloading functions
+    pub fn LoadFont(fileName: *const c_char) -> Font;
+    pub fn LoadFontEx(
+        fileName: *const c_char,
+        fontSize: c_int,
+        fontChars: *mut c_int,
+        charsCount: c_int,
+    ) -> Font;
+    pub fn UnloadFont(font: Font);
+
     // Text drawing functions
     pub fn DrawFPS(x: c_int, y: c_int);
     pub fn DrawText(text: *const c_char, posX: c_int, posY: c_int, fontSize: c_int, color: Color);
+    pub fn DrawTextEx(
+        font: Font,
+        text: *const c_char,
+        position: Vector2,
+        fontSize: c_float,
+        spacing: c_float,
+        color: Color,
+    );
 
     // Text misc. functions
     pub fn MeasureText(text: *const c_char, fontSize: c_int) -> c_int;
+    pub fn MeasureTextEx(
+        font: Font,
+        text: *const c_char,
+        fontSize: c_float,
+        spacing: c_float,
+    ) -> Vector2;
 }

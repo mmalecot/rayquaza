@@ -26,8 +26,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         .define("SUPPORT_COMPRESSION_API", "OFF")
         .define("SUPPORT_VR_SIMULATOR", "OFF")
         .define("SUPPORT_QUADS_DRAW_MODE", "OFF")
-        .define("SUPPORT_FILEFORMAT_FNT", "OFF")
-        .define("SUPPORT_FILEFORMAT_TTF", "OFF")
         .define("SUPPORT_FILEFORMAT_OBJ", "OFF")
         .define("SUPPORT_FILEFORMAT_MTL", "OFF")
         .define("SUPPORT_FILEFORMAT_IQM", "OFF")

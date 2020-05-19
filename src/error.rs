@@ -1,12 +1,13 @@
 //! The generic `Error` type.
 
-use crate::{texture::LoadTextureError, window::CreateWindowError};
+use crate::{text::LoadFontError, texture::LoadTextureError, window::CreateWindowError};
 use std::fmt::{Display, Formatter, Result};
 
 /// Generic error type.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Error {
     CreateWindowError(CreateWindowError),
+    LoadFontError(LoadFontError),
     LoadTextureError(LoadTextureError),
 }
 
@@ -27,5 +28,11 @@ impl From<CreateWindowError> for Error {
 impl From<LoadTextureError> for Error {
     fn from(error: LoadTextureError) -> Error {
         Error::LoadTextureError(error)
+    }
+}
+
+impl From<LoadFontError> for Error {
+    fn from(error: LoadFontError) -> Error {
+        Error::LoadFontError(error)
     }
 }
