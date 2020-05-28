@@ -8,11 +8,11 @@ use rayquaza::{
     window::WindowBuilder,
 };
 
-pub const WORLD_WIDTH: i32 = 30000;
-pub const BUILDING_COUNT: i32 = WORLD_WIDTH / BUILDING_WIDTH;
-pub const BUILDING_WIDTH: i32 = 100;
-pub const PLAYER_SPEED: f32 = 240.0;
-pub const ROTATION_SPEED: f32 = 100.0;
+const WORLD_WIDTH: i32 = 30000;
+const BUILDING_COUNT: i32 = WORLD_WIDTH / BUILDING_WIDTH;
+const BUILDING_WIDTH: i32 = 100;
+const PLAYER_SPEED: f32 = 240.0;
+const ROTATION_SPEED: f32 = 100.0;
 
 struct Building {
     rectangle: Rectangle,
