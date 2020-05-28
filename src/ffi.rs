@@ -470,6 +470,7 @@ extern "C" {
 
     // Texture drawing functions
     pub fn DrawTexture(texture: Texture2D, posX: c_int, posY: c_int, tint: Color);
+    pub fn DrawTextureRec(texture: Texture2D, sourceRec: Rectangle, position: Vector2, tint: Color);
 
     // Text
     // Font loading/unloading functions

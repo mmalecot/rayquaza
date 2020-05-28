@@ -4,6 +4,7 @@ use crate::{
     color::Color,
     drawing::Canvas,
     ffi,
+    math::{Rectangle, Vector2},
     window::{Handle, Window},
 };
 use std::{ffi::CString, fmt, path::Path, rc::Rc};
@@ -55,6 +56,25 @@ impl Canvas {
     pub fn draw_texture(&mut self, texture: &Texture, x: i32, y: i32, color: impl Into<Color>) {
         unsafe {
             ffi::DrawTexture(texture.raw, x, y, color.into().into());
+        }
+    }
+
+    // Draws a part of a texture defined by a rectangle.
+    #[inline]
+    pub fn draw_texture_rec(
+        &mut self,
+        texture: &Texture,
+        rectangle: impl Into<Rectangle>,
+        position: impl Into<Vector2>,
+        color: impl Into<Color>,
+    ) {
+        unsafe {
+            ffi::DrawTextureRec(
+                texture.raw,
+                rectangle.into().into(),
+                position.into().into(),
+                color.into().into(),
+            );
         }
     }
 }
