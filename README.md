@@ -1,8 +1,6 @@
 # Rayquaza
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mmalecot/rayquaza/CI)
-[![Crates.io](https://img.shields.io/crates/v/rayquaza)](https://crates.io/crates/rayquaza)
-[![Docs.rs](https://docs.rs/rayquaza/badge.svg)](https://docs.rs/rayquaza)
 ![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)
 ![Rust](https://img.shields.io/badge/rust-1.44+-blueviolet.svg?logo=rust)
 
@@ -15,15 +13,6 @@ Idiomatic wrapper for [raylib](https://www.raylib.com/).
 - No Cargo dependencies: build dependencies only.
 - Multi-platform: `Windows`, `Linux` and `macOS` (tested via CI for the 3 platforms).
 - Idiomatic: `Rust` concepts overuse, safe API, follows `Rust` API & style guidelines.
-
-## Usage
-
-Add this to your `Cargo.toml`:
-
-```toml
-[dependencies]
-rayquaza = "1.0.0-dev.1"
-```
 
 ## Examples
 
