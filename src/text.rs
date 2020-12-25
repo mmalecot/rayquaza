@@ -29,6 +29,13 @@ pub struct Font {
     pub(crate) raw: ffi::Font,
 }
 
+impl Font {
+    /// Returns the font base size.
+    pub fn base_size(&self) -> i32 {
+        self.raw.baseSize
+    }
+}
+
 impl Drop for Font {
     fn drop(&mut self) {
         unsafe {
