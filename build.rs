@@ -11,7 +11,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let raylib_source_directory = source_directory.join("external/raylib");
     let raylib_destination_directory = destination_directory.join("raylib");
 
-    // Copies raylib to output directory.
+    // Copies raylib to output directory
     dir::copy(
         &raylib_source_directory,
         &destination_directory,
@@ -47,12 +47,11 @@ fn main() -> Result<(), Box<dyn Error>> {
         .define("STATIC", "TRUE")
         .build();
     fs::remove_dir_all(&raylib_destination_directory)?;
-    let library_directory = build_directory.join("lib");
 
     // Links libraries
     println!(
         "cargo:rustc-link-search=native={}",
-        library_directory.display()
+        build_directory.join("lib").display()
     );
     if cfg!(target_os = "linux") {
         println!("cargo:rustc-link-lib=static=raylib");
