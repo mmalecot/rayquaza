@@ -12,13 +12,13 @@ jobs:
         include:
           - build: Ubuntu
             os: ubuntu-latest
-            toolchain: 1.44.0
+            toolchain: 1.49.0
           - build: macOS
             os: macos-latest
-            toolchain: 1.44.0
+            toolchain: 1.49.0
           - build: Windows
             os: windows-latest
-            toolchain: 1.44.0
+            toolchain: 1.49.0
     steps:
       - uses: actions/checkout@v1
       - name: Install Rust (rustup)
@@ -43,8 +43,8 @@ jobs:
       - uses: actions/checkout@v1
       - name: Install Rust (rustup)
         run: |
-          rustup update 1.44.0
-          rustup default 1.44.0
+          rustup update 1.49.0
+          rustup default 1.49.0
           rustup component add rustfmt
       - name: Check format
         run: cargo fmt -- --check

@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mmalecot/rayquaza/CI)
 ![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)
-![Rust](https://img.shields.io/badge/rust-1.44+-blueviolet.svg?logo=rust)
+![Rust](https://img.shields.io/badge/rust-1.49+-blueviolet.svg?logo=rust)
 
 ![Logo](resources/image/logo.png)
 
