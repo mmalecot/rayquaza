@@ -12,8 +12,14 @@ fn main() -> Result<(), Box<dyn Error>> {
     let raylib_destination_directory = destination_directory.join("raylib");
 
     // Copies raylib to output directory.
-    let options = CopyOptions::new();
-    dir::copy(&raylib_source_directory, &destination_directory, &options)?;
+    dir::copy(
+        &raylib_source_directory,
+        &destination_directory,
+        &CopyOptions {
+            overwrite: true,
+            ..Default::default()
+        },
+    )?;
 
     // Compiles raylib
     let mut config = Config::new(&raylib_destination_directory);
